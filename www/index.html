@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"/>
+    <title>youVote</title>
+
+    <script type="text/javascript">
+        var indexGlobals = {
+            appStarted : new Date()
+        };
+    </script>
+    <!-- <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"> -->
+    
+
+    <!-- angular-toastr -->
+    <link rel="stylesheet" type="text/css" href="lib/toastr/angular-toastr.css" />
+    
+
+
+   
+    <!-- ionic/angularjs js -->
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <script src="lib/jquery/jquery.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- <script src="lib/bootstrap/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="lib/toastr/angular-toastr.tpls.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- bootstrap, http://www.w3schools.com/bootstrap/      -->
+    <!-- <link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"> -->
+    
+
+    
+
+    <script src="js/app.js"></script>
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- endinject -->
+
+    <!-- inject:js -->    
+    <script src="js/appConfig.js"></script>    
+    <script src="js/controllers.js"></script>    
+    <script src="js/lang.js"></script>    
+    <script src="js/ng-cordova.min.js"></script>    
+    <script src="js/raw.js"></script>    
+    <script src="js/controllers/AppCtrl.js"></script>    
+    <script src="js/controllers/addQuestionCtrl.js"></script>    
+    <script src="js/controllers/developerCtrl.js"></script>    
+    <script src="js/controllers/geoCtrl.js"></script>    
+    <script src="js/controllers/promotableQuestionCtrl.js"></script>    
+    <script src="js/controllers/promotablesCtrl.js"></script>    
+    <script src="js/controllers/votableQuestionCtrl.js"></script>    
+    <script src="js/controllers/votablesCtrl.js"></script>    
+    <script src="js/filters/translateFilter.js"></script>    
+    <script src="js/filters/trustedUrlFilter.js"></script>    
+    <script src="js/filters/trutedUrlFilter.js"></script>    
+    <script src="js/services/apiService.js"></script>    
+    <script src="js/services/errorService.js"></script>    
+    <script src="js/services/starterService.js"></script>    
+    <!-- endinject -->
+
+    
+   
+    
+    
+    
+  </head>
+
+  <body ng-app="starter">
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>
