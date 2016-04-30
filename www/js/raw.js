@@ -1,8 +1,13 @@
 var preferredLanguage = 'en';
 
+// var apiServer = {
+//   host: 'http://localhost',
+//   port: 5000
+// };
+
 var apiServer = {
-	host: 'http://votey.dokku.jay.li'
-	//port: 5000
+  host: 'http://votey.dokku.jay.li'
+  
 };
 
 var setCookie = function(cname, cvalue, exdays) {

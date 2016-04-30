@@ -69,8 +69,10 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           'Content-Type': 'application/json'
         },
         data: {
-          header: questionHeader,
-          question: question
+          newQuestion: {
+            header: questionHeader,
+            body: question
+          }
         }
       }
       return $http(req).then(function(res) {
