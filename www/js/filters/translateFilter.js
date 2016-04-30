@@ -1,5 +1,6 @@
 app.filter('translate', function($rootScope) {
   return function(input, type, lang) {
-    return translations[$rootScope.language][type][input]
+  	var translation = translations[$rootScope.language][type][input];
+    return translation ? translation : input;
   }
 })

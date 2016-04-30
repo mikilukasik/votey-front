@@ -2,7 +2,7 @@ var preferredLanguage = 'en';
 
 var apiServer = {
 	host: 'http://votey.dokku.jay.li'
-	//port: 3000
+	//port: 5000
 };
 
 var setCookie = function(cname, cvalue, exdays) {

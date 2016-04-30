@@ -102,6 +102,9 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json'
+        },
+        data:{
+          questionId: questionId
         }
       }
       return $http(req).then(function(res) {
