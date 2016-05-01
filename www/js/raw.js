@@ -1,5 +1,5 @@
 var preferredLanguage = 'en';
-var devMode = true;
+var devMode = false;  //TODO: set this from UI
 
 var apiServer;
 if (devMode) {
