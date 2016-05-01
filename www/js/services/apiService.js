@@ -6,7 +6,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     //     url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
       
     //     headers: {
-    //       'Content-Type': 'application/json'
+    //       'Content-Type': 'application/json',
+       //   clientMongoId: $rootScope.clientMongoId
     //     },
     //     data: {
     //       question: question
@@ -22,7 +23,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
       
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data: {
           username: username,
@@ -44,7 +46,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
       
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data: {
           username: username,
@@ -66,7 +69,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
       
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data: {
           newQuestion: {
@@ -87,7 +91,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/promotions',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data: promotion
       }
@@ -103,7 +108,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'PUT',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data:{
           questionId: questionId
@@ -121,7 +127,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/votes',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         },
         data: vote
       }
@@ -138,7 +145,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/promotables',
        
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {
@@ -154,7 +162,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/votables',
        
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {
@@ -169,7 +178,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {
@@ -184,7 +194,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + hardWareId,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {
@@ -199,7 +210,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'PUT',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {
@@ -214,7 +226,8 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
         }
       }
       return $http(req).then(function(res) {

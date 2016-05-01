@@ -6,7 +6,7 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
     $rootScope.spinIt = true;
     apiService.getVotables().then(function(res) {
       $rootScope.spinIt = false;
-      $scope.votables = res;
+      $scope.votables = res.result;
     }, function(err) {
       $rootScope.spinIt = false;
       errorService.dealWithError(err);

@@ -6,7 +6,7 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
     $rootScope.spinIt = true;
     apiService.getPromotables().then(function(res) {
       $rootScope.spinIt = false;
-      $scope.promotables = res;
+      $scope.promotables = res.result;
     }, function(err) {
       $rootScope.spinIt = false;
       errorService.dealWithError(err);
