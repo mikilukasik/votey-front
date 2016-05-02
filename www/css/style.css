@@ -5,8 +5,8 @@ div.spinner {
   top: 0; left: 0; bottom: 0; right: 0;
   height: 100%;
   text-align: center;
-  background: black;
-  opacity:0.30;
+  /*background: black;
+  opacity:0.30;*/
 }
 
 .spinner svg {

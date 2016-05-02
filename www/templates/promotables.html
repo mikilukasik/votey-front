@@ -2,12 +2,26 @@
   <ion-content>
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
-      <ion-item ng-repeat="promotable in promotables" href="#/app/promotables/{{promotable._id}}">
+      <ion-item ng-repeat="promotable in promotables">
+        <ion-item href="#/app/promotables/{{promotable._id}}" class="item-borderless">
+          <div class="row">
+          
+            <div class="col-80"><h2>{{promotable.header}}</h2></div>
+            <div class="col"><i class="icon ion-arrow-up-b"></i> {{promotable.promoteUp}}</div>
+            <div class="col"><i class="icon ion-arrow-down-b"></i> {{promotable.promoteDown}}</div>
+
+          </div>
+          <div class="row">
+            <div class="col"><p>{{promotable.question}}</p></div>
+          </div>
+        
+        </ion-item>
         <div class="row">
-          <div class="col-80">{{promotable.header}}</div>
-          <div class="col"><i class="icon ion-arrow-up-b"></i> {{promotable.promoteUp}}</div>
-          <div class="col"><i class="icon ion-arrow-down-b"></i> {{promotable.promoteDown}}</div>
-        </div>
+          <div class="col"><button class="button button-block button-assertive" href="" ng-click="promote.down(promotable)" ng-class="{ disabled: promotable.previousPromotion === 'down' }"><i class="icon ion-arrow-down-b"></i>
+  {{'DOWN' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block button-balanced" href="" ng-click="promote.up(promotable)" ng-class="{ disabled: promotable.previousPromotion === 'up' }"><i class="icon ion-arrow-up-b"></i>
+  {{'UP' | translate:'labels'}}</button> </div>
+      </div>
       </ion-item>
     </ion-list>
   </ion-content>

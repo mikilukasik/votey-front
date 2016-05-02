@@ -142,7 +142,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     getPromotables: function() {
       var req = {
         method: 'GET',
-        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/promotables',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/promotables?rnd=' + Math.random(),
        
         headers: {
           'Content-Type': 'application/json',
@@ -159,7 +159,7 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     getVotables: function() {
       var req = {
         method: 'GET',
-        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/votables',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/votables?rnd=' + Math.random(),
        
         headers: {
           'Content-Type': 'application/json',
