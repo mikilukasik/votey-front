@@ -10,9 +10,9 @@
         <textarea class="col" style="font-size: 1.3em; line-height: 1.2em">{{question.question}}</textarea>
       </div>
       <div class="row" style="min-height: 10%">
-        <div class="col"><button class="button button-block button-assertive" ng-click="vote.down(question)"><i class="icon ion-close"></i>
+        <div class="col"><button class="button button-block button-assertive" ng-class="{ disabled: question.previousVote === 'no' }" ng-click="vote.down(question)"><i class="icon ion-close"></i>
 {{'NO' | translate:'labels'}}</button> </div>
-        <div class="col"><button class="button button-block button-balanced" ng-click="vote.up(question)"><i class="icon ion-checkmark"></i>
+        <div class="col"><button class="button button-block button-balanced" ng-class="{ disabled: question.previousVote === 'yes' }" ng-click="vote.up(question)"><i class="icon ion-checkmark"></i>
 {{'YES' | translate:'labels'}}</button> </div>
       </div>
     </div>

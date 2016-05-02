@@ -17,9 +17,9 @@
         
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block button-assertive" href="" ng-click="promote.down(promotable)" ng-class="{ disabled: promotable.previousPromotion === 'down' }"><i class="icon ion-arrow-down-b"></i>
+          <div class="col"><button class="button button-block button-assertive" href="" ng-click="promote.down(promotable,$index)" ng-class="{ disabled: promotable.previousPromotion === 'down' }"><i class="icon ion-arrow-down-b"></i>
   {{'DOWN' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block button-balanced" href="" ng-click="promote.up(promotable)" ng-class="{ disabled: promotable.previousPromotion === 'up' }"><i class="icon ion-arrow-up-b"></i>
+          <div class="col"><button class="button button-block button-balanced" href="" ng-click="promote.up(promotable,$index)" ng-class="{ disabled: promotable.previousPromotion === 'up' }"><i class="icon ion-arrow-up-b"></i>
   {{'UP' | translate:'labels'}}</button> </div>
       </div>
       </ion-item>

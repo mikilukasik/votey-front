@@ -14,7 +14,7 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
   };
 
   $rootScope.vote = {
-    up: function(question) {
+    up: function(question,index) {
       $rootScope.spinIt = true;
       apiService.postVote({
         clientMongoId: $rootScope.clientMongoId,
@@ -26,6 +26,9 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
         if(res.success){
           if(question.previousVote === 'no') question.voteDown--;
           question.voteUp++;
+          if(!question.previousVote && index != undefined){
+            $scope.votables.push($scope.votables.splice(index,1)[0]);
+          };
           question.previousVote = 'yes';
         }
 
@@ -35,7 +38,7 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
         errorService.dealWithError(err);
       })
     },
-    down: function(question) {
+    down: function(question,index) {
       $rootScope.spinIt = true;
       apiService.postVote({
         clientMongoId: $rootScope.clientMongoId,
@@ -47,6 +50,9 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
         if(res.success){
           if(question.previousVote === 'yes') question.voteUp--;
           question.voteDown++;
+          if(!question.previousVote && index != undefined){
+            $scope.votables.push($scope.votables.splice(index,1)[0]);
+          };
           question.previousVote = 'no';
         }
 

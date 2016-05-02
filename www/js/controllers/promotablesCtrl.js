@@ -14,7 +14,7 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
   };
 
   $rootScope.promote = {
-    up: function(question) {
+    up: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postPromotion({
         clientMongoId: $rootScope.clientMongoId,
@@ -26,6 +26,9 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
         if(res.success){
           if(question.previousPromotion === 'down') question.promoteDown--;
           question.promoteUp++;
+          if(!question.previousPromotion && index != undefined){
+            $scope.promotables.push($scope.promotables.splice(index,1)[0]);
+          };
           question.previousPromotion = 'up';
         }
 
@@ -35,7 +38,7 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
         errorService.dealWithError(err);
       })
     },
-    down: function(question) {
+    down: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postPromotion({
         clientMongoId: $rootScope.clientMongoId,
@@ -47,6 +50,9 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
         if(res.success){
           if(question.previousPromotion === 'up') question.promoteUp--;
           question.promoteDown++;
+          if(!question.previousPromotion && index != undefined){
+            $scope.promotables.push($scope.promotables.splice(index,1)[0]);
+          };
           question.previousPromotion = 'down';
         }
         

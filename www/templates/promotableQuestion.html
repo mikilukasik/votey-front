@@ -10,9 +10,9 @@
         <textarea class="col" style="font-size: 1.3em; line-height: 1.2em">{{question.question}}</textarea>
       </div>
       <div class="row" style="min-height: 10%">
-        <div class="col"><button class="button button-block button-assertive" ng-click="promote.down(question)"><i class="icon ion-arrow-down-b"></i>
+        <div class="col"><button class="button button-block button-assertive" ng-class="{ disabled: question.previousPromotion === 'down' }" ng-click="promote.down(question)"><i class="icon ion-arrow-down-b"></i>
 {{'DOWN' | translate:'labels'}}</button> </div>
-        <div class="col"><button class="button button-block button-balanced" ng-click="promote.up(question)"><i class="icon ion-arrow-up-b"></i>
+        <div class="col"><button class="button button-block button-balanced" ng-class="{ disabled: question.previousPromotion === 'up' }" ng-click="promote.up(question)"><i class="icon ion-arrow-up-b"></i>
 {{'UP' | translate:'labels'}}</button> </div>
       </div>
       <div class="row" style="min-height: 10%">
