@@ -1,8 +1,8 @@
 <ion-view view-title="{{'Questions Available for Voting' | translate:'titles'}}">
-  <ion-content>
+  <ion-content class="light-orange-background">
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
-      <ion-item ng-repeat="votable in votables">
+      <div class="card" ng-repeat="votable in votables">
         <ion-item href="#/app/votables/{{votable._id}}" class="item-borderless">
           <div class="row">
           
@@ -17,12 +17,12 @@
         
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block button-assertive" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close"></i>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
   {{'NO' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block button-balanced" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark"></i>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
   {{'YES' | translate:'labels'}}</button> </div>
       </div>
-      </ion-item>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>
