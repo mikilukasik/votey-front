@@ -139,6 +139,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
             } else {
                 document.addEventListener("deviceready", function(){
                     whenDeviceReady();
+                    $rootScope.toConsole('idaig jooooooooooooooooooooooooooooooo')
                     resolve()
                 }, false);
             }
@@ -159,9 +160,11 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
 
     };
 
-    testa = $rootScope.deviceIsReady;
+    //testa = $rootScope.deviceIsReady;
 
-    $rootScope.deviceIsReady()
+    $rootScope.deviceIsReady().then(function(){
+        $rootScope.spinIt = false;
+    })
 
 
     var watchOptions = {
