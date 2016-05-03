@@ -1,4 +1,4 @@
-app.factory('apiService', function($http, $filter, $rootScope) {
+app.factory('apiService', function($http, $filter, $rootScope, $q) {
   return {
     // getSession: function(question) {
     //   var req = {
@@ -17,8 +17,53 @@ app.factory('apiService', function($http, $filter, $rootScope) {
     //     return res.data;
     //   });
     // },
+
+    postComment: function(questionObj, comment){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions/' + questionObj._id + '/comments',
+      
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        },
+        data: {
+          questionId: questionObj._id,
+          newComment: comment
+        }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+    clearDb: function(){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/clearDb',
+      
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        },
+        data: {}
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
     postLogin: function(username, password, hardWareId) { //register
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
       
@@ -31,17 +76,18 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           password: password,
           hardWareId: hardWareId
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
 
     putLogin: function(username, password) { //login
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'PUT',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/login',
       
@@ -53,18 +99,19 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           username: username,
           password: password
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
 
 
     postQuestion: function(questionHeader, question) {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){ 
+        return $http({
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions',
       
@@ -78,16 +125,17 @@ app.factory('apiService', function($http, $filter, $rootScope) {
             body: question
           }
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
-      });
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      })
     },
     postPromotion: function(promotion) {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/promotions',
         headers: {
@@ -95,16 +143,17 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           clientMongoId: $rootScope.clientMongoId
         },
         data: promotion
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
     escalateQuestion: function(questionId) {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'PUT',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
@@ -114,16 +163,17 @@ app.factory('apiService', function($http, $filter, $rootScope) {
         data:{
           questionId: questionId
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
     postVote: function(vote) {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'POST',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/votes',
         headers: {
@@ -131,16 +181,17 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           clientMongoId: $rootScope.clientMongoId
         },
         data: vote
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
     getPromotables: function() {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/promotables?rnd=' + Math.random(),
        
@@ -148,16 +199,17 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           'Content-Type': 'application/json',
           clientMongoId: $rootScope.clientMongoId
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
     getVotables: function() {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/votables?rnd=' + Math.random(),
        
@@ -165,40 +217,41 @@ app.factory('apiService', function($http, $filter, $rootScope) {
           'Content-Type': 'application/json',
           clientMongoId: $rootScope.clientMongoId
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
       });
     },
     getQuestion: function(questionId) {
-      var req = {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json',
           clientMongoId: $rootScope.clientMongoId
         }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+
       });
     },
     getClientMongoId: function(hardWareId) {
-      var req = {
+      return $http({
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + hardWareId,
         headers: {
           'Content-Type': 'application/json',
           clientMongoId: $rootScope.clientMongoId
         }
-      }
-      return $http(req).then(function(res) {
+      }).then(function(res) {
         if(res.data.toast){
           $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
@@ -206,36 +259,36 @@ app.factory('apiService', function($http, $filter, $rootScope) {
       });
     },
     checkClientMongoId: function(clientMongoId) {
-      var req = {
+      
+      return $http({
         method: 'PUT',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
         headers: {
           'Content-Type': 'application/json',
           clientMongoId: $rootScope.clientMongoId
         }
-      }
-      return $http(req).then(function(res) {
+      }).then(function(res) {
         if(res.data.toast){
           $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
         }
         return res.data;
       });
     },
-    postClientMongoId: function(clientMongoId) {
-      var req = {
-        method: 'GET',
-        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
-        headers: {
-          'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
-        }
-      }
-      return $http(req).then(function(res) {
-        if(res.data.toast){
-          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
-        }
-        return res.data;
-      });
-    }
+    // postClientMongoId: function(clientMongoId) {
+    //   var req = {
+    //     method: 'GET',
+    //     url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       clientMongoId: $rootScope.clientMongoId
+    //     }
+    //   }
+    //   return $http(req).then(function(res) {
+    //     if(res.data.toast){
+    //       $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+    //     }
+    //     return res.data;
+    //   });
+    // }
   }
 })

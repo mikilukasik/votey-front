@@ -1,20 +1,51 @@
 <ion-view view-title="{{'Vote' | translate:'titles'}}">
-  <ion-content>
+  <ion-content class="light-orange-background">
     <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
-      <div class="row" style="min-height: 10%;">
-        <div class="col text-center">
-          <h1>{{question.header}}</h1>
+      <div class="card">
+        <ion-item class="item-borderless">
+          <div class="row">
+
+            <div class="col-80">
+              <h2>{{question.header}}</h2></div>
+            <div class="col"><i class="icon ion-arrow-up-b"></i> {{question.voteUp}}</div>
+            <div class="col"><i class="icon ion-arrow-down-b"></i> {{question.voteDown}}</div>
+
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>{{question.question}}</p>
+            </div>
+          </div>
+
+        </ion-item>
+        <div class="row">
+          <div class="col"><button class="button button-block" href="" ng-click="vote.down(question)" ng-class="{ disabled: question.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
+  {{'NO' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.up(question)" ng-class="{ disabled: question.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
+  {{'YES' | translate:'labels'}}</button> </div>
         </div>
+        <ion-item ng-repeat="comment in question.comments | reverse">
+          <p>{{comment}}</p>
+        </ion-item>
+        
+        <ion-item>
+        <form ng-submit="postComment()">
+          <div class="row">
+            
+              <div class="col-80">
+                <input type="text" placeholder="Your Comment" ng-model="postCommentObj.comment">
+              </div>
+              <div class="col-20">
+                <button class="button button-block" type="submit">SEND</button>
+              </div>
+            
+          </div>
+          </form>
+        </ion-item>
+        
       </div>
-      <div class="row" style="min-height: 70%">
-        <textarea class="col" style="font-size: 1.3em; line-height: 1.2em">{{question.question}}</textarea>
-      </div>
-      <div class="row" style="min-height: 10%">
-        <div class="col"><button class="button button-block button-assertive" ng-class="{ disabled: question.previousVote === 'no' }" ng-click="vote.down(question)"><i class="icon ion-close"></i>
-{{'NO' | translate:'labels'}}</button> </div>
-        <div class="col"><button class="button button-block button-balanced" ng-class="{ disabled: question.previousVote === 'yes' }" ng-click="vote.up(question)"><i class="icon ion-checkmark"></i>
-{{'YES' | translate:'labels'}}</button> </div>
-      </div>
+
     </div>
+    
   </ion-content>
 </ion-view>

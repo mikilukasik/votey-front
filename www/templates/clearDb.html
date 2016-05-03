@@ -1,0 +1,18 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">{{'Developer' | translate:'titles'}}</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeClearDbModal()">{{'Close' | translate:'labels'}}</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="light-orange-background">
+  <div class="card">
+    Are you sure?
+
+    <button class="button button-block button-assertive" ng-click="clearDb()">Clear it!</button>
+    <button class="button button-block" ng-click="closeClearDbModal()">Oh NOOO!!!</button>
+
+  
+</div>
+  </ion-content>
+</ion-modal-view>

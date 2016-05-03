@@ -1,27 +1,38 @@
 <ion-view view-title="{{'Questions Available for Voting' | translate:'titles'}}">
   <ion-content class="light-orange-background">
-  <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
+    <div class="spinner" style="z-index:99" ng-if="spinIt">
+      <ion-spinner icon="android"></ion-spinner>
+    </div>
     <ion-list>
       <div class="card" ng-repeat="votable in votables">
         <ion-item href="#/app/votables/{{votable._id}}" class="item-borderless">
           <div class="row">
-          
-            <div class="col-80"><h2>{{votable.header}}</h2></div>
+
+            <div class="col-80">
+              <h2>{{votable.header}}</h2></div>
             <div class="col"><i class="icon ion-arrow-up-b"></i> {{votable.voteUp}}</div>
             <div class="col"><i class="icon ion-arrow-down-b"></i> {{votable.voteDown}}</div>
 
           </div>
           <div class="row">
-            <div class="col"><p>{{votable.question}}</p></div>
+            <div class="col">
+              <div class="item-text-wrap"><p>{{votable.question}}</p></div>
+            </div>
           </div>
-        
+
+          <div class="row">
+            <div class="col">
+              <div><p style="font-size: 0.7em">{{votable.numberOfComments}} comment{{ votable.numberOfComments === 1 ? '' : 's' }}</p></div>
+            </div>
+          </div>
+
         </ion-item>
         <div class="row">
           <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
   {{'NO' | translate:'labels'}}</button> </div>
           <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
   {{'YES' | translate:'labels'}}</button> </div>
-      </div>
+        </div>
       </div>
     </ion-list>
   </ion-content>

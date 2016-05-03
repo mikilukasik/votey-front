@@ -1,4 +1,4 @@
-app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $interval, $filter, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
+app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout, $interval, $filter, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
 
     $rootScope.language = preferredLanguage;
 
@@ -15,11 +15,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
     //     // error
     //   });
 
-    $rootScope.device = {
-        isReady: false,
-        isMobile: false,
-        isBrowser: false
-    }
+    $rootScope.device = {};
+    
 
     $scope.getIdFromCookie = function(dontGetCookie) {
 
@@ -41,19 +38,21 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
                 $rootScope.clientMongoId = res.clientMongoId;
                 $rootScope.loginMode = 'fresh';
                 $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+                $rootScope.forceResolveWaitForDevice();
             }, function(err) {
                 $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
                 errorService.dealWithError(err);
             })
 
         } else {
-            $rootScope.toConsole('clientMongoId from cookie:', $rootScope.clientMongoId);
+            $rootScope.toConsole('clientMongoId from cookie, will check with server..', $rootScope.clientMongoId);
 
             apiService.checkClientMongoId($rootScope.clientMongoId).then(function(res) {
                 setCookie("clientId", res.clientMongoId, 365);
                 $rootScope.clientMongoId = res.clientMongoId;
                 $rootScope.loginMode = 'cookie';
                 $rootScope.toConsole('clientMongoId without login.');
+                $rootScope.forceResolveWaitForDevice()
             }, function(err) {
                 $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
                 
@@ -86,6 +85,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
             //f(!$rootScope.device.uuid) $rootScope.device.uuid = Math.random();       //in browser
             
+            //$rootScope.forceResolveWaitForDevice();
 
             $scope.getIdFromCookie()
 
@@ -96,6 +96,19 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
     }, 5000);
+        
+    $scope.getIdFromHardwareId = function () {
+      $rootScope.toConsole('requesting clientMongoId...');
+        apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
+            $rootScope.clientMongoId = res.clientMongoId;
+            $rootScope.loginMode = 'hardWareId';
+            $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+            $rootScope.forceResolveWaitForDevice();
+        }, function(err) {
+            $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
+            errorService.dealWithError(err);
+        })
+    }
 
     var whenDeviceReady = function () {
        $rootScope.toConsole('Device got ready in ' + (new Date() - indexGlobals.appStarted) + ' seconds.');
@@ -108,25 +121,46 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
         $rootScope.device.model = $cordovaDevice.getModel();
         $rootScope.device.platform = $cordovaDevice.getPlatform();
         $rootScope.device.uuid = $cordovaDevice.getUUID();
-        $rootScope.version = $cordovaDevice.getVersion();
+        $rootScope.device.version = $cordovaDevice.getVersion();
 
         $scope.getIdFromHardwareId();
 
     };
 
-    $scope.getIdFromHardwareId = function () {
-      $rootScope.toConsole('requesting clientMongoId...');
-        apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
-            $rootScope.clientMongoId = res.clientMongoId;
-            $rootScope.loginMode = 'hardWareId';
-            $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
-        }, function(err) {
-            $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
-            errorService.dealWithError(err);
-        })
-    }
+    $rootScope.waitForDevice = function () {
+       return $q(function(resolve, reject){
+            $rootScope.forceResolveWaitForDevice = function(){
+                resolve(true)//forced
+            };
+            if ($rootScope.device.isReady){
+                resolve();
+            } else {
+                document.addEventListener("deviceready", function(){
+                    whenDeviceReady();
+                    $rootScope.toConsole('Device is ready, requesting clientMongoId by hardWareId..')
+                    //resolve()
+                }, false);
+            }
+        });
+    };
 
-    document.addEventListener("deviceready", whenDeviceReady, false);
+
+    $rootScope.deviceIsReady = function(){
+        return $q(function(resolve,rej){
+            if($rootScope.gotMongoId) return resolve();
+            $rootScope.waitForDevice().then(function(forced){
+                console.log('Device got ready! Forced: ',forced, 'clientMongoId: ', $rootScope.clientMongoId)
+                $rootScope.gotMongoId = true;
+                return resolve();
+            })
+        })
+            
+
+    };
+
+    $rootScope.deviceIsReady().then(function(){
+        $rootScope.spinIt = false;
+    })
 
 
     var watchOptions = {
@@ -309,6 +343,118 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicModal, $timeout, $i
 
 
     };
+
+    $rootScope.vote = {
+    up: function(question,index) {
+      $rootScope.spinIt = true;
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: true
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousVote === 'no') question.voteDown--;
+          question.voteUp++;
+          // if(!question.previousVote && index != undefined && $rootScope.votables){
+          //   $rootScope.votables.push($rootScope.votables.splice(index,1)[0]);
+          // };
+          question.previousVote = 'yes';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    down: function(question,index) {
+      $rootScope.spinIt = true;
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: false
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousVote === 'yes') question.voteUp--;
+          question.voteDown++;
+          // if(!question.previousVote && index != undefined){
+          //   $rootScope.votables.push($rootScope.votables.splice(index,1)[0]);
+          // };
+          question.previousVote = 'no';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    }
+  };
+
+  $rootScope.promote = {
+    up: function(question, index) {
+      $rootScope.spinIt = true;
+      apiService.postPromotion({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        promoting: true
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+        
+        if(res.success){
+          if(question.previousPromotion === 'down') question.promoteDown--;
+          question.promoteUp++;
+          // if(!question.previousPromotion && index != undefined && $rootScope.promotables){
+          //   $rootScope.promotables.push($rootScope.promotables.splice(index,1)[0]);
+          // };
+          question.previousPromotion = 'up';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    down: function(question, index) {
+      $rootScope.spinIt = true;
+      apiService.postPromotion({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        promoting: false
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousPromotion === 'up') question.promoteUp--;
+          question.promoteDown++;
+          // if(!question.previousPromotion && index != undefined){
+          //   $rootScope.promotables.push($rootScope.promotables.splice(index,1)[0]);
+          // };
+          question.previousPromotion = 'down';
+        }
+        
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    escalate: function(question) {
+      $rootScope.spinIt = true;
+      apiService.escalateQuestion(question._id).then(function(res) {
+        $rootScope.spinIt = false;
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    }
+  };
 
 
 })
