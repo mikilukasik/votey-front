@@ -109,7 +109,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
     },
 
 
-    postQuestion: function(questionHeader, question) {
+    postQuestion: function(header, body) {
       return $rootScope.deviceIsReady().then(function(){ 
         return $http({
         method: 'POST',
@@ -121,8 +121,8 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         },
         data: {
           newQuestion: {
-            header: questionHeader,
-            body: question
+            header: header,
+            body: body
           }
         }
       }).then(function(res) {

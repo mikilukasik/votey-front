@@ -3,12 +3,12 @@ app.controller('addQuestionCtrl', function($rootScope, $scope, $filter, toastr, 
     questionInput: ''
   }
   $scope.addQuestion = function() {
-    $scope.question = $scope.addQuestionObj.questionInput;
+    $scope.question = $scope.addQuestionObj.body;
     $rootScope.spinIt = true;
-    apiService.postQuestion($scope.addQuestionObj.questionHeader, $scope.addQuestionObj.question).then(function(res) {
+    apiService.postQuestion($scope.addQuestionObj.header, $scope.addQuestionObj.question).then(function(res) {
         $rootScope.spinIt = false;
-        $scope.addQuestionObj.question = ''; //clears input in view
-        $scope.addQuestionObj.questionHeader = ''; //clears input in view
+        $scope.addQuestionObj.body = ''; //clears input in view
+        $scope.addQuestionObj.header = ''; //clears input in view
       },
       function(err) {
         $rootScope.spinIt = false;
