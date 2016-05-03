@@ -5,7 +5,8 @@
       <button class="button button-clear" ng-click="closeRegisterModal()">{{'Close' | translate:'labels'}}</button>
     </div>
   </ion-header-bar>
-  <ion-content>
+  <ion-content class="light-orange-background">
+  <div class="card">
     <form ng-submit="sendRegister()">
       <div class="list">
         <label class="item item-input">
@@ -26,6 +27,6 @@
        
       </div>
     </form>
-     
+     </div>
   </ion-content>
 </ion-modal-view>

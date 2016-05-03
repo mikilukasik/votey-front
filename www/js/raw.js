@@ -1,10 +1,10 @@
 var preferredLanguage = 'en';
-var devMode = false;  //TODO: set this from UI
+var devMode = true;  //TODO: set this from UI
 
 var apiServer;
 if (devMode) {
   apiServer = {
-    host: 'http://localhost',
+    host: 'http://miki.ddns.net',//'http://localhost',
     port: 5000
   };
 } else {

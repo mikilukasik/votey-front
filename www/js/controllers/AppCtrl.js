@@ -96,9 +96,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
 
 
     }, 5000);
-
-    
-
+        
     $scope.getIdFromHardwareId = function () {
       $rootScope.toConsole('requesting clientMongoId...');
         apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
@@ -139,8 +137,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
             } else {
                 document.addEventListener("deviceready", function(){
                     whenDeviceReady();
-                    $rootScope.toConsole('idaig jooooooooooooooooooooooooooooooo')
-                    resolve()
+                    $rootScope.toConsole('Device is ready, requesting clientMongoId by hardWareId..')
+                    //resolve()
                 }, false);
             }
         });
@@ -159,8 +157,6 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
             
 
     };
-
-    //testa = $rootScope.deviceIsReady;
 
     $rootScope.deviceIsReady().then(function(){
         $rootScope.spinIt = false;
@@ -347,6 +343,118 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
 
 
     };
+
+    $rootScope.vote = {
+    up: function(question,index) {
+      $rootScope.spinIt = true;
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: true
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousVote === 'no') question.voteDown--;
+          question.voteUp++;
+          // if(!question.previousVote && index != undefined && $rootScope.votables){
+          //   $rootScope.votables.push($rootScope.votables.splice(index,1)[0]);
+          // };
+          question.previousVote = 'yes';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    down: function(question,index) {
+      $rootScope.spinIt = true;
+      apiService.postVote({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        voting: false
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousVote === 'yes') question.voteUp--;
+          question.voteDown++;
+          // if(!question.previousVote && index != undefined){
+          //   $rootScope.votables.push($rootScope.votables.splice(index,1)[0]);
+          // };
+          question.previousVote = 'no';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    }
+  };
+
+  $rootScope.promote = {
+    up: function(question, index) {
+      $rootScope.spinIt = true;
+      apiService.postPromotion({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        promoting: true
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+        
+        if(res.success){
+          if(question.previousPromotion === 'down') question.promoteDown--;
+          question.promoteUp++;
+          // if(!question.previousPromotion && index != undefined && $rootScope.promotables){
+          //   $rootScope.promotables.push($rootScope.promotables.splice(index,1)[0]);
+          // };
+          question.previousPromotion = 'up';
+        }
+
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    down: function(question, index) {
+      $rootScope.spinIt = true;
+      apiService.postPromotion({
+        clientMongoId: $rootScope.clientMongoId,
+        questionId: question._id,
+        promoting: false
+      }).then(function(res) {
+        $rootScope.spinIt = false;
+
+        if(res.success){
+          if(question.previousPromotion === 'up') question.promoteUp--;
+          question.promoteDown++;
+          // if(!question.previousPromotion && index != undefined){
+          //   $rootScope.promotables.push($rootScope.promotables.splice(index,1)[0]);
+          // };
+          question.previousPromotion = 'down';
+        }
+        
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    },
+    escalate: function(question) {
+      $rootScope.spinIt = true;
+      apiService.escalateQuestion(question._id).then(function(res) {
+        $rootScope.spinIt = false;
+        $rootScope.toConsole(res)
+      }, function(err) {
+        $rootScope.spinIt = false;
+        errorService.dealWithError(err);
+      })
+    }
+  };
 
 
 })
