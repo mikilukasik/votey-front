@@ -4,7 +4,7 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
   });
   $scope.getVotableQuestions = function() {
     $rootScope.spinIt = true;
-    apiService.getVotables().then(function(res) {
+    return apiService.getVotables().then(function(res) {
       $rootScope.spinIt = false;
       $rootScope.votables = res.data;
     }, function(err) {
@@ -13,6 +13,13 @@ app.controller('votablesCtrl', function($rootScope, $scope, $http, apiService, e
     });
   };
 
+  $scope.doRefresh = function() {
+    $scope.getVotableQuestions()
+     .then(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+   };
   
 
 })

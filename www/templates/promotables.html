@@ -1,6 +1,12 @@
 <ion-view view-title="{{'Questions Available for Promoting' | translate:'titles'}}">
   <ion-content class="light-orange-background">
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
+
+  <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="doRefresh()">
+  </ion-refresher>
+
     <ion-list>
       <div class="card" ng-repeat="promotable in promotables">
         <ion-item href="#/app/promotables/{{promotable._id}}" class="item-borderless">

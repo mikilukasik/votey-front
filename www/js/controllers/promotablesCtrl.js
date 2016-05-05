@@ -4,7 +4,7 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
   });
   $scope.getPromotableQuestions = function() {
     $rootScope.spinIt = true;
-    apiService.getPromotables().then(function(res) {
+    return apiService.getPromotables().then(function(res) {
       $rootScope.spinIt = false;
       $rootScope.promotables = res.data;
     }, function(err) {
@@ -12,6 +12,14 @@ app.controller('promotablesCtrl', function($rootScope, $scope, apiService, error
       errorService.dealWithError(err);
     });
   };
+
+  $scope.doRefresh = function() {
+    $scope.getPromotableQuestions()
+     .then(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+   };
 
   
 
