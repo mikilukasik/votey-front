@@ -41,6 +41,77 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       });
     },
 
+    deleteComment: function(questionObj, comment){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'DELETE',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions/' + questionObj._id + '/comments/' + comment.id,
+     
+         headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+        // data: {
+        //   questionId: questionObj._id,
+        //   newComment: comment
+        // }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+    putComment: function(questionObj, comment){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'PUT',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions/' + questionObj._id + '/comments/' + comment.id,
+     
+         headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        },
+        data: {
+          questionId: questionObj._id,
+          comment: comment
+        }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+    reportComment: function(questionObj, comment){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions/' + questionObj._id + '/comments/' + comment.id + '/report',
+     
+         headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+        //data: {
+        //   questionId: questionObj._id,
+        //   newComment: comment
+        // }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+
+
     clearDb: function(){
       return $rootScope.deviceIsReady().then(function(){
         return $http({

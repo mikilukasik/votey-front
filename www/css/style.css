@@ -28,6 +28,12 @@ div.spinner {
 
 }
 
+/*https://forum.ionicframework.com/t/button-stable-no-border-in-1-2-1/39726*/
+
+.ion-option-button.button.button-stable {
+  border-left: 1px solid #b2b2b2;
+}
+
 /*http://stackoverflow.com/questions/32562237/how-to-fill-vertical-space-with-flexbox-in-ionic*/
 .fill-vertical-space{
     display: -webkit-flex;
@@ -51,4 +57,9 @@ div.spinner {
 
 .light-orange-background{
   background: #fffccc;
+}
+
+.small_button{
+    line-height: 1px !important;
+    min-height: 14px !important;
 }

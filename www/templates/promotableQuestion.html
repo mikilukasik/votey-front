@@ -1,54 +1,112 @@
 <ion-view view-title="{{'Promote Question' | translate:'titles'}}">
   <ion-content class="light-orange-background">
-    <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
-      <div class="card">
-        <ion-item class="item-borderless">
-          <div class="row">
+    <div class="spinner" style="z-index:99" ng-if="spinIt">
+      <ion-spinner icon="android"></ion-spinner>
+    </div>
+    <div class="card">
+      <ion-item click-for-options class="item-borderless">
 
-            <div class="col-80">
-              <h2>{{question.header}}</h2></div>
-            <div class="col"><i class="icon ion-arrow-up-b"></i> {{question.promoteUp}}</div>
-            <div class="col"><i class="icon ion-arrow-down-b"></i> {{question.promoteDown}}</div>
+        <ion-option-button ng-if="question.postedBy == clientMongoId" class="button-stable" ng-click="questionOptions.edit(question)">
+          Edit
+        </ion-option-button>
+        <ion-option-button ng-if="question.postedBy == clientMongoId" class="button-stable" ng-click="questionOptions.remove(question)">
+          Remove
+        </ion-option-button>
+        <ion-option-button ng-if="question.postedBy != clientMongoId" class="button-stable" ng-click="questionOptions.report(question)">
+          Report Question
+        </ion-option-button>
 
-          </div>
-          <div class="row">
-            <div class="col">
+
+
+
+
+        <div class="row">
+
+          <div class="col-80">
+            <h2>{{question.header}}</h2></div>
+          <div class="col"><i class="icon ion-arrow-up-b"></i> {{question.promoteUp}}</div>
+          <div class="col"><i class="icon ion-arrow-down-b"></i> {{question.promoteDown}}</div>
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="item-text-wrap">
               <p>{{question.body}}</p>
             </div>
           </div>
-
-        </ion-item>
-        <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="promote.down(question)" ng-class="{ disabled: question.previousPromotion === 'down' }"><i class="icon ion-arrow-down-b assertive"></i>
-  {{'DOWN' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="promote.up(question)" ng-class="{ disabled: question.previousPromotion === 'up' }"><i class="icon ion-arrow-up-b balanced"></i>
-  {{'UP' | translate:'labels'}}</button> </div>
         </div>
+
+      </ion-item>
+      <div class="row">
+        <div class="col"><button class="button button-block" href="" ng-click="promote.down(question)" ng-class="{ disabled: question.previousPromotion === 'down' }"><i class="icon ion-arrow-down-b assertive"></i>
+  {{'DOWN' | translate:'labels'}}</button> </div>
+        <div class="col"><button class="button button-block" href="" ng-click="promote.up(question)" ng-class="{ disabled: question.previousPromotion === 'up' }"><i class="icon ion-arrow-up-b balanced"></i>
+  {{'UP' | translate:'labels'}}</button> </div>
+      </div>
+      <div class="row">
+        <div class="col"><button class="button button-block button-stable" ng-click="promote.escalate(question)"><i class="ion-checkmark-round"></i> {{'ESCALATE' | translate:'labels'}}</button>
+        </div>
+      </div>
+      <ion-item click-for-options ng-repeat="comment in question.comments | reverse" always-show-buttons="{{comment.isEditing}}" class="item-borderless" style="border-top: 1px solid #eee">
+
+        <ion-option-button ng-if="comment.addedBy == clientMongoId && !comment.isEditing" class="button button-stable" ng-click="commentOptions.edit(question, comment)">
+          Edit
+        </ion-option-button>
+        <ion-option-button ng-if="comment.addedBy == clientMongoId&& !comment.isEditing" class="button button-stable" ng-click="commentOptions.remove(question, comment)">
+          Remove
+        </ion-option-button>
+        <ion-option-button ng-if="comment.addedBy != clientMongoId&& !comment.isEditing" class="button button-stable" ng-click="commentOptions.report(question, comment)">
+          Report
+        </ion-option-button>
+        <ion-option-button ng-if="comment.isEditing" class="button button-stable" ng-click="commentOptions.save(question, comment)">
+          Save
+        </ion-option-button>
+        <ion-option-button ng-if="comment.isEditing" class="button button-stable" ng-click="commentOptions.cancelEdit(question, comment)">
+          Cancel
+        </ion-option-button>
+
         <div class="row">
-          <div class="col"><button class="button button-block button-stable" ng-click="promote.escalate(question)"><i class="ion-checkmark-round"></i> {{'ESCALATE' | translate:'labels'}}</button> 
-        </div></div>
-        <ion-item ng-repeat="comment in question.comments | reverse">
-          <p>{{comment}}</p>
-        </ion-item>
-        
-        <ion-item>
+
+          <div class="col">
+            <div class="item-text-wrap">
+              <p ng-hide="comment.isEditing">{{comment.text}}</p>
+              <div class="row" ng-show="comment.isEditing">
+                <div class="col-40">
+                ...
+                </div>
+                <div class="col-60">
+                  <textarea type="text" ng-model="comment.text"></textarea>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col-90">
+              <button class="button button-stable small_button" ng-click="commentOptions(comment,question)">···</button>
+            </div> -->
+
+        </div>
+      </ion-item>
+
+      <ion-item>
         <form ng-submit="postComment()">
           <div class="row">
-            
-              <div class="col-80">
-                <input type="text" placeholder="Your Comment" ng-model="postCommentObj.comment">
-              </div>
-              <div class="col-20">
-                <button class="button button-block" type="submit">SEND</button>
-              </div>
-            
+
+            <div class="col-80">
+              <input type="text" placeholder="Your Comment" ng-model="postCommentObj.comment">
+            </div>
+            <div class="col-20">
+              <button class="button button-stable" type="submit">SEND</button>
+            </div>
+
           </div>
-          </form>
-        </ion-item>
-        
-      </div>
+        </form>
+      </ion-item>
 
     </div>
-    
+
+    </div>
+
   </ion-content>
 </ion-view>
