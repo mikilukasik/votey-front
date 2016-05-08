@@ -24,6 +24,24 @@ app.config(function($stateProvider, $urlRouterProvider, toastrConfig) {
       }
     }
   })
+  .state('app.moderateQuestions', {
+    url: '/moderateQuestions',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/moderateQuestions.html',
+        controller: 'moderateQuestionsCtrl'
+      }
+    }
+  })
+  .state('app.moderateComments', {
+    url: '/moderateComments',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/moderateComments.html',
+        controller: 'moderateCommentsCtrl'
+      }
+    }
+  })
   .state('app.promotable', {
     url: '/promotables/:promotableId',
     views: {
@@ -62,6 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider, toastrConfig) {
   });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/votables');
+
   angular.extend(toastrConfig, {
     autoDismiss: false,
     containerId: 'toast-container',

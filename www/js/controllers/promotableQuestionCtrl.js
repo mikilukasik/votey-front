@@ -1,4 +1,4 @@
-app.controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, $ionicModal, $ionicPopup, modalService, apiService, errorService, classesService) {
+app.controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, $ionicModal, $ionicPopup, $location, modalService, apiService, errorService, classesService) {
   $scope.questionId = $stateParams.promotableId;
 
   $scope.postCommentObj = {};
@@ -47,6 +47,27 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
   };
 
   modalService.initAreYouSureModal($scope);
+
+  $scope.questionOptions = {
+
+    report: function(question){
+      
+      $ionicPopup.confirm({
+        title: 'Are you sure you want to report this question for being inappropriate?',
+        //template: 'No Connection Found.'
+
+      }).then(function(confirmed){
+        if(confirmed){
+
+          apiService.reportQuestion(question).then(function(apiRes){
+            $location.path( "/app/promoteQuestion" );
+          });
+
+        }
+      });
+
+    },
+  }
 
   $scope.commentOptions = {
 

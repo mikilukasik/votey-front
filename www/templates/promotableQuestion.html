@@ -6,19 +6,9 @@
     <div class="card">
       <ion-item click-for-options class="item-borderless">
 
-        <ion-option-button ng-if="question.postedBy == clientMongoId" class="button-stable" ng-click="questionOptions.edit(question)">
-          Edit
-        </ion-option-button>
-        <ion-option-button ng-if="question.postedBy == clientMongoId" class="button-stable" ng-click="questionOptions.remove(question)">
-          Remove
-        </ion-option-button>
         <ion-option-button ng-if="question.postedBy != clientMongoId" class="button-stable" ng-click="questionOptions.report(question)">
           Report Question
         </ion-option-button>
-
-
-
-
 
         <div class="row">
 
@@ -65,28 +55,24 @@
           Cancel
         </ion-option-button>
 
-        <div class="row">
+        <!-- <div class="row">
 
-          <div class="col">
+          <div class="col"> -->
             <div class="item-text-wrap">
               <p ng-hide="comment.isEditing">{{comment.text}}</p>
               <div class="row" ng-show="comment.isEditing">
                 <div class="col-40">
-                ...
+
                 </div>
                 <div class="col-60">
-                  <textarea type="text" ng-model="comment.text"></textarea>
+                  <input type="text" ng-model="comment.text" style="width: 100%">
                 </div>
-                
+
               </div>
             </div>
-          </div>
+       <!--    </div>
 
-          <!-- <div class="col-90">
-              <button class="button button-stable small_button" ng-click="commentOptions(comment,question)">···</button>
-            </div> -->
-
-        </div>
+        </div> -->
       </ion-item>
 
       <ion-item>

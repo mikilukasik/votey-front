@@ -6,7 +6,9 @@ var translations = {
       'Vote': 'Vote',
       'Login': 'Login',
       'Logoff': 'Logoff',
-      'Developer': 'Developer'
+      'Developer': 'Developer',
+      'Moderate Questions': 'Moderate Questions',
+      'Moderate Comments': 'Moderate Comments'
     },
     titles: {
       'Add a New Question': 'Add a New Question',
@@ -17,7 +19,9 @@ var translations = {
       'Promote Question': 'Promote Question',
       'Developer': 'Developer',
       'Login': 'Login',
-      'Register': 'Register'
+      'Register': 'Register',
+      'Moderate Questions': 'Moderate Questions',
+      'Moderate Comments': 'Moderate Comments'
 
     },
     labels: {

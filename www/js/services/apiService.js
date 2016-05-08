@@ -110,6 +110,30 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       });
     },
 
+    reportQuestion: function(questionObj){
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) +  '/api/questions/' + questionObj._id + '/report',
+     
+         headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+        //data: {
+        //   questionId: questionObj._id,
+        //   newComment: comment
+        // }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+
 
 
     clearDb: function(){
@@ -252,6 +276,42 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
           clientMongoId: $rootScope.clientMongoId
         },
         data: vote
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+    getQuestionsToReview: function() {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'GET',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/toReview?rnd=' + Math.random(),
+       
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+    getCommentsToReview: function() {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'GET',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/comments/toReview?rnd=' + Math.random(),
+       
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
       }).then(function(res) {
           if(res.data.toast){
             $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
