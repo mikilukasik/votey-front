@@ -2,27 +2,18 @@
   <ion-content class="light-orange-background">
   <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
     <ion-list>
-      <div class="card" ng-repeat="question in questions">
+      <div class="card" ng-repeat="comment in comments">
         <ion-item class="item-borderless">  <!--  href="#/app/questions/{{question._id}}" -->
           <div class="row">
-          
-            <div class="col"><h2>{{question.header}}</h2></div>
-            <!-- <div class="col"><i class="icon ion-arrow-up-b"></i> {{question.promoteUp}}</div>
-            <div class="col"><i class="icon ion-arrow-down-b"></i> {{question.promoteDown}}</div> -->
-
-          </div>
-          <div class="row">
             <div class="col">
-              <div class="item-text-wrap"><p>{{question.body}}</p></div>
+              <div class="item-text-wrap"><h3>{{comment.text}}</h3></div>
             </div>
           </div>
 
           <div class="row">
-            <div class="col-50">
-              <div><p>{{question.numberOfComments}} comment{{ question.numberOfComments === 1 ? '' : 's' }}</p></div>
-            </div>
-            <div class="col-50">
-              <div><p>Reported by {{question.reportedBy.length}} user{{ question.reportedBy.length === 1 ? '' : 's' }}</p></div>
+            
+            <div class="col">
+              <div><p>Reported by {{comment.reportedBy.length}} user{{ comment.reportedBy.length === 1 ? '' : 's' }}</p></div>
             </div>
           </div>
         

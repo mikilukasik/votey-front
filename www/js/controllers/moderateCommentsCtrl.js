@@ -3,9 +3,7 @@ app.controller('moderateCommentsCtrl', function($rootScope, $scope, apiService, 
     $scope.getCommentsToReview();
   });
   
-  scope.getCommentsToReview = function(){
-
-    $scope.getCommentsToReview = function() {
+  $scope.getCommentsToReview = function() {
     $rootScope.spinIt = true;
     apiService.getCommentsToReview().then(function(res) {
       $rootScope.spinIt = false;
@@ -15,7 +13,6 @@ app.controller('moderateCommentsCtrl', function($rootScope, $scope, apiService, 
       errorService.dealWithError(err);
     });
   };
-  }
 
 
 })

@@ -34,6 +34,7 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
 
     var newComment = new classesService.comment({
       text: $scope.postCommentObj.comment,
+      questionId: $scope.question._id
     })
 
     $scope.postCommentObj.comment && apiService.postComment($scope.question, newComment).then(function(result){

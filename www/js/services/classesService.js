@@ -9,8 +9,10 @@ app.factory('classesService', function($rootScope) {
         
       comment.reportedBy = [];
 
-      comment.verified = false,
-      comment.addedBy = $rootScope.clientMongoId
+      comment.verified = false;
+      comment.addedBy = $rootScope.clientMongoId;
+
+      comment.questionId = null;
 
       if(initObj) for (var key in initObj) {
         comment[key] = initObj[key];
