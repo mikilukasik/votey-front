@@ -7,9 +7,6 @@
           <div class="row">
           
             <div class="col"><h2>{{question.header}}</h2></div>
-            <!-- <div class="col"><i class="icon ion-arrow-up-b"></i> {{question.promoteUp}}</div>
-            <div class="col"><i class="icon ion-arrow-down-b"></i> {{question.promoteDown}}</div> -->
-
           </div>
           <div class="row">
             <div class="col">
@@ -28,10 +25,10 @@
         
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
-  {{'NO' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
-  {{'YES' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="moderateQuestion.disapprove(question)"><i class="icon ion-close assertive"></i>
+  {{'DISAPPROVE' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="moderateQuestion.approve(question)"><i class="icon ion-checkmark balanced"></i>
+  {{'APPROVE' | translate:'labels'}}</button> </div>
         </div>
       </div>
     </ion-list>

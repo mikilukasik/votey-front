@@ -35,6 +35,8 @@ var translations = {
       'UP': 'UP',
       'DOWN': 'DOWN',
       'ESCALATE': 'ESCALATE',
+      'APPROVE': 'APPROVE',
+      'DISAPPROVE': 'DISAPPROVE',
 
       'Close': 'Close'
     },
