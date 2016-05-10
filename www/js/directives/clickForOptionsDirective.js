@@ -35,6 +35,7 @@ app.directive('clickForOptions', ['$ionicGesture', function($ionicGesture) {
 
       };
 
+      
       $ionicGesture.on('tap', thisFunc, element);
    
       buttons.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';

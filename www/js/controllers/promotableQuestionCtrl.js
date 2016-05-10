@@ -28,6 +28,10 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
     })
 
   };
+
+  // $scope.focusThis = function (event){
+  //   console.log('a',event)
+  // };
     
 
   $scope.postComment = function (){

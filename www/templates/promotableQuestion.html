@@ -60,15 +60,15 @@
           <div class="col"> -->
             <div class="item-text-wrap">
               <p ng-hide="comment.isEditing">{{comment.text}}</p>
-              <div class="row" ng-show="comment.isEditing">
-                <div class="col-40">
+              <input ng-if="comment.isEditing" ng-model="comment.text" init-focus style="border: none; width: 100%">
+              
 
-                </div>
-                <div class="col-60">
-                  <input type="text" ng-model="comment.text" style="width: 100%">
-                </div>
+              <!-- <div ng-if="comment.isEditing" contenteditable ng-model="comment.text" init-focus></div> -->
 
-              </div>
+
+              <!-- <p ng-show="comment.isEditing" contenteditable ng-model="'comment.text'"></p> -->
+
+              <!-- <input ng-show="comment.isEditing" type="text" ng-model="comment.text" style="width: 100%"> -->
             </div>
        <!--    </div>
 
