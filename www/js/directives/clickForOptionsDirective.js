@@ -11,28 +11,35 @@ app.directive('clickForOptions', ['$ionicGesture', function($ionicGesture) {
             }
             var thisFunc2 = function(e){
                 // Grab the content
-                var content = element[0].querySelector('.item-content');
+                content = element[0].querySelector('.item-content');
 
                 // Grab the buttons and their width
-                var buttons = element[0].querySelector('.item-options');
+                buttons = element[0].querySelector('.item-options');
+
+
 
                 if (!buttons) {
                     return;
                 }
                 var buttonsWidth = buttons.offsetWidth;
+                var contentWidth = content.offsetWidth;
 
                 ionic.requestAnimationFrame(function() {
                     content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
 
                     if (!buttons.classList.contains('invisible')) {
+
+                        content.style.width = contentWidth + buttonsWidth +'px';
                         
-                        content.style[ionic.CSS.TRANSFORM] = '';
-                        setTimeout(function() {
+                        // content.style[ionic.CSS.TRANSFORM] = '';
+                        // setTimeout(function() {
                             buttons.classList.add('invisible');
-                        }, 250);                
+                        // }, 250);                
                     } else {
                         buttons.classList.remove('invisible');
-                        content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
+                        
+                        //content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
+                        content.style.width = contentWidth - buttonsWidth +'px';
                     }
                 });     
 
