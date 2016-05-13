@@ -267,6 +267,42 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       });
     },
 
+    approveComment: function(questionId, commentId) {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/comments/' + commentId + '/approve',
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
+    disapproveComment: function(questionId, commentId) {
+      return $rootScope.deviceIsReady().then(function(){
+        return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/comments/' + commentId + '/disapprove',
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        }
+      }).then(function(res) {
+          if(res.data.toast){
+            $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+          }
+          return res.data;
+        });
+      });
+    },
+
     approveQuestion: function(questionId) {
       return $rootScope.deviceIsReady().then(function(){
         return $http({

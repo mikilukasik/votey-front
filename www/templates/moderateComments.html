@@ -19,12 +19,18 @@
         
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
-  {{'NO' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
-  {{'YES' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="moderateComment.disapprove(comment)"><i class="icon ion-close assertive"></i>
+  {{'DISAPPROVE' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="moderateComment.approve(comment)"><i class="icon ion-checkmark balanced"></i>
+  {{'APPROVE' | translate:'labels'}}</button> </div>
         </div>
       </div>
     </ion-list>
   </ion-content>
 </ion-view>
+
+
+
+
+        
+      

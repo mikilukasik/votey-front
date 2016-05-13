@@ -1,28 +1,38 @@
 <ion-view view-title="{{'Moderate Questions' | translate:'titles'}}">
   <ion-content class="light-orange-background">
-  <div class="spinner" style="z-index:99" ng-if="spinIt"><ion-spinner icon="android"></ion-spinner></div>
+    <div class="spinner" style="z-index:99" ng-if="spinIt">
+      <ion-spinner icon="android"></ion-spinner>
+    </div>
     <ion-list>
       <div class="card" ng-repeat="question in questions">
-        <ion-item class="item-borderless">  <!--  href="#/app/questions/{{question._id}}" -->
+        <ion-item class="item-borderless">
+          <!--  href="#/app/questions/{{question._id}}" -->
           <div class="row">
-          
-            <div class="col"><h2>{{question.header}}</h2></div>
+
+            <div class="col">
+              <h2>{{question.header}}</h2></div>
           </div>
           <div class="row">
             <div class="col">
-              <div class="item-text-wrap"><p>{{question.body}}</p></div>
+              <div class="item-text-wrap">
+                <p>{{question.body}}</p>
+              </div>
             </div>
           </div>
 
           <div class="row">
             <div class="col-50">
-              <div><p>{{question.numberOfComments}} comment{{ question.numberOfComments === 1 ? '' : 's' }}</p></div>
+              <div>
+                <p>{{question.numberOfComments}} comment{{ question.numberOfComments === 1 ? '' : 's' }}</p>
+              </div>
             </div>
             <div class="col-50">
-              <div><p>Reported by {{question.reportedBy.length}} user{{ question.reportedBy.length === 1 ? '' : 's' }}</p></div>
+              <div>
+                <p>Reported by {{question.reportedBy.length}} user{{ question.reportedBy.length === 1 ? '' : 's' }}</p>
+              </div>
             </div>
           </div>
-        
+
         </ion-item>
         <div class="row">
           <div class="col"><button class="button button-block" href="" ng-click="moderateQuestion.disapprove(question)"><i class="icon ion-close assertive"></i>

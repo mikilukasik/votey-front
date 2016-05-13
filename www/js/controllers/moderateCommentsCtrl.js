@@ -8,11 +8,26 @@ app.controller('moderateCommentsCtrl', function($rootScope, $scope, apiService, 
     apiService.getCommentsToReview().then(function(res) {
       $rootScope.spinIt = false;
       $rootScope.comments = res.data;
+      console.log(res.data)
     }, function(err) {
       $rootScope.spinIt = false;
       errorService.dealWithError(err);
     });
   };
+
+  $scope.moderateComment = {
+    approve: function(comment) {
+      apiService.approveComment(comment.questionId, comment.id).then($scope.getCommentsToReview, function(err) {
+        errorService.dealWithError(err);
+      });
+    },
+
+    disapprove: function(comment) {
+      apiService.disapproveComment(comment.questionId, comment.id).then($scope.getCommentsToReview, function(err) {
+        errorService.dealWithError(err);
+      });
+    }
+  }
 
 
 })

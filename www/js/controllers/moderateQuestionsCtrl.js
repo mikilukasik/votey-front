@@ -25,8 +25,7 @@ app.controller('moderateQuestionsCtrl', function($rootScope, $scope, apiService,
       apiService.disapproveQuestion(question._id).then($scope.getQuestionsToReview, function(err) {
         errorService.dealWithError(err);
       });
-    },
-
+    }
   }
 
 })

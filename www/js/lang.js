@@ -38,6 +38,9 @@ var translations = {
       'APPROVE': 'APPROVE',
       'DISAPPROVE': 'DISAPPROVE',
 
+      'OK': 'OK',
+      'Cancel': 'Cancel',
+
       'Close': 'Close'
     },
     toasts: {
@@ -69,6 +72,11 @@ var translations = {
 
       'Client not in DB.': 'Client not in DB.'
 
+    },
+
+    popUps: {
+      'Are you sure you want to report this comment for being inappropriate?': 'Are you sure you want to report this comment for being inappropriate?',
+      'Are you sure you want to report this question for being inappropriate?': 'Are you sure you want to report this question for being inappropriate?'
     }
   }
 };

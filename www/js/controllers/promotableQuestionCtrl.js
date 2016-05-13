@@ -1,11 +1,11 @@
-app.controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, $ionicModal, $ionicPopup, $location, modalService, apiService, errorService, classesService) {
+app.controller('promotableQuestionCtrl', function($rootScope, $scope, $stateParams, $ionicPopup, $location, $filter, modalService, apiService, errorService, classesService) {
   $scope.questionId = $stateParams.promotableId;
 
   $scope.postCommentObj = {};
   $scope.question = {};
 
   $rootScope.toConsole('$scope.questionId', $stateParams.promotableId);
-  $rootScope.spinIt = true;
+  
 
   $scope.init = function(){
 
@@ -13,10 +13,9 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
 
   };
 
-
-
   $scope.updateQuestions = function (){
 
+    $rootScope.spinIt = true;
     apiService.getQuestion($scope.questionId).then(function(result) {
       var question = result.data;
       $rootScope.spinIt = false;
@@ -28,11 +27,6 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
     })
 
   };
-
-  // $scope.focusThis = function (event){
-  //   console.log('a',event)
-  // };
-    
 
   $scope.postComment = function (){
 
@@ -51,16 +45,14 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
     });
   };
 
-  modalService.initAreYouSureModal($scope);
-
   $scope.questionOptions = {
 
     report: function(question){
       
       $ionicPopup.confirm({
-        title: 'Are you sure you want to report this question for being inappropriate?',
-        //template: 'No Connection Found.'
-
+        title: $filter('translate')('Are you sure you want to report this question for being inappropriate?', 'popUps'),
+        cancelText: $filter('translate')('Cancel','labels'),
+        okText: $filter('translate')('OK','labels')        
       }).then(function(confirmed){
         if(confirmed){
 
@@ -72,23 +64,22 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
       });
 
     },
-  }
+  };
 
   $scope.commentOptions = {
 
     remove: function(question, comment){
       
       $ionicPopup.confirm({
-        title: 'Are you sure you want to remove this comment?',
-        //template: 'No Connection Found.'
-
+        title: $filter('translate')('Are you sure you want to remove this comment?','popUps'),
+        cancelText: $filter('translate')('Cancel','labels'),
+        okText: $filter('translate')('OK','labels')         
       }).then(function(confirmed){
         if(confirmed){
 
           apiService.deleteComment(question, comment).then(function(apiRes){
             $scope.updateQuestions();
           })
-
 
         }
       });
@@ -110,16 +101,14 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
             $scope.updateQuestions();
           })
 
-
-
     },
 
     report: function(question, comment){
       
       $ionicPopup.confirm({
-        title: 'Are you sure you want to report this comment for being inappropriate?',
-        //template: 'No Connection Found.'
-
+        title: $filter('translate')('Are you sure you want to report this comment for being inappropriate?', 'popUps'),
+        cancelText: $filter('translate')('Cancel','labels'),
+        okText: $filter('translate')('OK','labels')        
       }).then(function(confirmed){
         if(confirmed){
 
@@ -133,12 +122,8 @@ app.controller('promotableQuestionCtrl', function($rootScope, $scope, $statePara
 
     },
 
-  }
+  };
 
   $scope.init();
-
-
-
-
   
 })
