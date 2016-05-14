@@ -480,6 +480,25 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         }
         return res.data;
       });
+    },
+    addCredit: function(addCreditAmount) {
+      
+      return $http({
+        method: 'POST',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/addCredit',
+        headers: {
+          'Content-Type': 'application/json',
+          clientMongoId: $rootScope.clientMongoId
+        },
+        data: {
+          addCreditAmount: addCreditAmount
+        }
+      }).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+        }
+        return res.data;
+      });
     }
     
   }

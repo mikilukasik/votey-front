@@ -28,4 +28,11 @@ app.controller('developerCtrl', function($rootScope, $scope, $ionicModal, apiSer
         $scope.clearDbModal.hide();
     };
 
+  $scope.addCredit= function(amount){
+    apiService.addCredit(amount).then(function(resp){
+      $rootScope.myCredit = resp.data;
+      $scope.addCreditAmount = '';
+    })
+  };
+
 })
