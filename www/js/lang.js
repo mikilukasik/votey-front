@@ -44,7 +44,7 @@ var translations = {
       'Close': 'Close'
     },
     toasts: {
-      'Question added successfully.': 'Question added successfully.',
+      'Question added.': 'Question added.',
 
       "Passwords don't match.": "Passwords don't match.",
       'User registered.': 'User registered.',

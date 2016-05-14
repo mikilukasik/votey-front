@@ -8,6 +8,8 @@ app.factory('classesService', function($rootScope) {
       comment.text = '';
         
       comment.reportedBy = [];
+      comment.approvedBy = [];
+      comment.disapprovedBy = [];
 
       comment.verified = false;
       comment.addedBy = $rootScope.clientMongoId;
@@ -18,8 +20,7 @@ app.factory('classesService', function($rootScope) {
         comment[key] = initObj[key];
       };
 
-    },    
-
+    }   
  
   };
 })

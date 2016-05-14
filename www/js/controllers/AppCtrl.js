@@ -56,7 +56,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
             }, function(err) {
                 $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
                 
-                $scope.getIdFromCookie(true)
+                $scope.getIdFromCookie(true);
 
                 errorService.dealWithError(err);
             })

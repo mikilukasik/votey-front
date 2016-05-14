@@ -43,7 +43,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
     })
 
     $scope.postCommentObj.comment && apiService.postComment($scope.question, newComment).then(function(result){
-      // $scope.question.comments.push(newComment);
+      
       return apiService.getQuestion($scope.questionId);
       
     }).then(function(result){
