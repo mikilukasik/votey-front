@@ -129,7 +129,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     })
     .then(function () {
       
-      if ( new Date() - $rootScope.tokenCreatedAt > 86400 * 3 ) return apiService.refreshAuthToken($rootScope.authToken);  //refreshAuthToken if older than 3 days
+      if ( new Date() - $rootScope.tokenCreatedAt > 86400 * 1 ) return apiService.refreshAuthToken($rootScope.authToken);  //refreshAuthToken if older than 1 days
       
       return;
       
