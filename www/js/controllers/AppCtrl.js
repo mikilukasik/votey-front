@@ -2,7 +2,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
   
   var whenMenuOpened = function(){
     apiService.getMyCredit().then(function(result){
-        $rootScope.myCredit = result.data;
+        $rootScope.myCredit = (result.data) ? result.data: 0;
     })
   };
 
