@@ -99,7 +99,7 @@ app.filter('translate', function($rootScope) {
   	if (translation) return buildNewStringFromData(translation, data);
   	
   	//still missing
-  	console.log('ADD THIS TO DICT: ', moddedString)
+  	console.log('ADD THIS TO ' + type + ' DICT: ', "'" + moddedString + "'")
     return '!DICT: ' + input;
 
   }
