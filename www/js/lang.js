@@ -42,7 +42,11 @@ var translations = {
       'Cancel': 'Cancel',
 
       'Close': 'Close',
-      'Available credit:': 'Available credit:' 
+      'Available credit:': 'Available credit:',
+      'You have 0 credit.': 'You have 0 credit.',
+      'You have 0 credits.': 'You have 0 credits.',
+      'You have  credits.': ' '  //keep this translation empty!
+
     },
     toasts: {
       'Question added.': 'Question added.',
@@ -71,7 +75,8 @@ var translations = {
       'Negative promotion registered.': 'Negative promotion registered.',
       'Positive promotion registered.': 'Positive promotion registered.',
 
-      'Client not in DB.': 'Client not in DB.'
+      'Client not in DB.': 'Client not in DB.',
+      "You don't have enough credit (min: 0, you have: 0)": "You don't have enough credit (min: 0, you have: 0)"
 
     },
 

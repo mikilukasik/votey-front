@@ -47,7 +47,9 @@
     <ion-footer-bar>
      
       <!-- <div><label>Known from: </label> {{loginMode}}</div> -->
-      <div><label>{{'Available credit:' | translate:'labels'}} </label> {{myCredit}}</div>
+      <div><label>{{ (myCredit == 1 )
+                        ? ('You have 1 credit.' | translate:'labels')
+                        : ('You have ' + myCredit + ' credits.' | translate:'labels')}} </label></div>
 
 
     </ion-footer-bar>
