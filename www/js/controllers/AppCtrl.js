@@ -24,32 +24,34 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
   //   });
   $rootScope.device = {};
   $scope.getIdFromCookie = function(dontGetCookie) {
-    $rootScope.clientMongoId = '';
+    $rootScope.authToken = '';
     if (!dontGetCookie) {
-      $rootScope.clientMongoId = getCookie("clientId");
+      $rootScope.authToken = getCookie("authToken");
     }
-    if ($rootScope.clientMongoId === '') {
-      $rootScope.toConsole('no clientMongoId, requesting...');
-      apiService.getClientMongoId('newBrowser').then(function(res) {
-        setCookie("clientId", res.clientMongoId, 365);
-        $rootScope.clientMongoId = res.clientMongoId;
+    if ($rootScope.authToken === '') {
+      $rootScope.toConsole('no authToken, requesting...');
+      apiService.getAuthToken('newBrowser').then(function(res) {
+        setCookie("authToken", res.authToken, 365);
+        $rootScope.authToken = res.authToken;
+        $rootScope.tokenCreatedAt = new Date();
         $rootScope.loginMode = 'fresh';
-        $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+        $rootScope.toConsole('authToken received', $rootScope.authToken);
         $rootScope.forceResolveWaitForDevice();
       }, function(err) {
-        $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
+        $rootScope.toConsole('silentError', 'NO authToken AT ALL!!');
         errorService.dealWithError(err);
       })
     } else {
-      $rootScope.toConsole('clientMongoId from cookie, will check with server..', $rootScope.clientMongoId);
-      apiService.checkClientMongoId($rootScope.clientMongoId).then(function(res) {
-        setCookie("clientId", res.clientMongoId, 365);
-        $rootScope.clientMongoId = res.clientMongoId;
+      $rootScope.toConsole('authToken from cookie, will check with server..', $rootScope.authToken);
+      apiService.checkAuthToken($rootScope.authToken).then(function(res) {
+        setCookie("authToken", res.authToken, 365);
+        $rootScope.authToken = res.authToken;
+        $rootScope.tokenCreatedAt = new Date();
         $rootScope.loginMode = 'cookie';
-        $rootScope.toConsole('clientMongoId without login.');
+        $rootScope.toConsole('authToken without login.');
         $rootScope.forceResolveWaitForDevice()
       }, function(err) {
-        $rootScope.toConsole('silentError', 'clientMongoId cookie problem, trying again as new..');
+        $rootScope.toConsole('silentError', 'authToken cookie problem, trying again as new..');
         $scope.getIdFromCookie(true);
         errorService.dealWithError(err);
       })
@@ -76,14 +78,15 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     }
   }, 5000);
   $scope.getIdFromHardwareId = function() {
-    $rootScope.toConsole('requesting clientMongoId...');
-    apiService.getClientMongoId($rootScope.device.uuid).then(function(res) {
-      $rootScope.clientMongoId = res.clientMongoId;
+    $rootScope.toConsole('requesting authToken...');
+    apiService.getAuthToken($rootScope.device.uuid).then(function(res) {
+      $rootScope.authToken = res.authToken;
+      $rootScope.tokenCreatedAt = new Date();
       $rootScope.loginMode = 'hardWareId';
-      $rootScope.toConsole('clientMongoId received', $rootScope.clientMongoId);
+      $rootScope.toConsole('authToken received', $rootScope.authToken);
       $rootScope.forceResolveWaitForDevice();
     }, function(err) {
-      $rootScope.toConsole('silentError', 'NO clientMongoId AT ALL!!');
+      $rootScope.toConsole('silentError', 'NO authToken AT ALL!!');
       errorService.dealWithError(err);
     })
   }
@@ -109,7 +112,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
       } else {
         document.addEventListener("deviceready", function() {
           whenDeviceReady();
-          $rootScope.toConsole('Device is ready, requesting clientMongoId by hardWareId..')
+          $rootScope.toConsole('Device is ready, requesting authToken by hardWareId..')
             //resolve()
         }, false);
       }
@@ -119,10 +122,27 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     return $q(function(resolve, rej) {
       if ($rootScope.gotMongoId) return resolve();
       $rootScope.waitForDevice().then(function(forced) {
-        console.log('Device got ready! Forced: ', forced, 'clientMongoId: ', $rootScope.clientMongoId)
+        console.log('Device got ready! Forced: ', forced, 'authToken: ', $rootScope.authToken)
         $rootScope.gotMongoId = true;
         return resolve();
       })
+    })
+    .then(function () {
+      
+      if ( new Date() - $rootScope.tokenCreatedAt > 86400 * 1 ) return apiService.refreshAuthToken($rootScope.authToken);  //refreshAuthToken if older than 1 days
+      
+      return;
+      
+    })
+    .then(function(newAuthTokenInObj){
+      
+      if(newAuthTokenInObj){
+        $rootScope.authToken = newAuthTokenInObj.authToken;
+        $rootScope.tokenCreatedAt = new Date();
+      };
+     
+      return;
+      
     })
   };
   $rootScope.deviceIsReady().then(function() {
@@ -211,8 +231,9 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     $rootScope.toConsole('Sending login', $scope.loginData);
     apiService.putLogin($scope.loginData.loginName, $scope.loginData.loginPassword).then(function(res) {
       if (res.success) {
-        $rootScope.toConsole('Logged in, clientMongoId:', res.clientMongoId)
-        $rootScope.clientMongoId = res.clientMongoId;
+        $rootScope.toConsole('Logged in, authToken:', res.authToken)
+        $rootScope.authToken = res.authToken;
+        $rootScope.tokenCreatedAt = new Date();
         $rootScope.loginMode = 'username';
         $scope.loginData.loginName = undefined;
         $scope.loginData.loginPassword = undefined;
@@ -227,8 +248,9 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
       $rootScope.toConsole('Registering', $scope.loginData);
       apiService.postLogin($scope.loginData.registerName, $scope.loginData.registerPassword).then(function(res) {
         if (res.success) {
-          $rootScope.toConsole('Logged in, clientMongoId:', res.clientMongoId);
-          $rootScope.clientMongoId = res.clientMongoId;
+          $rootScope.toConsole('Logged in, authToken:', res.authToken);
+          $rootScope.authToken = res.authToken;
+          $rootScope.tokenCreatedAt = new Date();
           $rootScope.loginMode = 'username';
           $scope.loginData.registerName = undefined;
           $scope.loginData.registerPassword = undefined;
@@ -247,7 +269,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     up: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postVote({
-        clientMongoId: $rootScope.clientMongoId,
+        // authToken: $rootScope.authToken,
         questionId: question._id,
         voting: true
       }).then(function(res) {
@@ -269,7 +291,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     down: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postVote({
-        clientMongoId: $rootScope.clientMongoId,
+        // authToken: $rootScope.authToken,
         questionId: question._id,
         voting: false
       }).then(function(res) {
@@ -293,7 +315,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     up: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postPromotion({
-        clientMongoId: $rootScope.clientMongoId,
+        // authToken: $rootScope.authToken,
         questionId: question._id,
         promoting: true
       }).then(function(res) {
@@ -315,7 +337,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     down: function(question, index) {
       $rootScope.spinIt = true;
       apiService.postPromotion({
-        clientMongoId: $rootScope.clientMongoId,
+        // authToken: $rootScope.authToken,
         questionId: question._id,
         promoting: false
       }).then(function(res) {

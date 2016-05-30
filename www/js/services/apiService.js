@@ -9,7 +9,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           questionId: questionObj._id,
@@ -32,7 +32,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
      
          headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
         // data: {
         //   questionId: questionObj._id,
@@ -55,7 +55,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
      
          headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           questionId: questionObj._id,
@@ -78,7 +78,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
      
          headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
         //data: {
         //   questionId: questionObj._id,
@@ -101,7 +101,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
      
          headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
         //data: {
         //   questionId: questionObj._id,
@@ -127,7 +127,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {}
       }).then(function(res) {
@@ -147,7 +147,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           username: username,
@@ -171,7 +171,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           username: username,
@@ -195,7 +195,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           newQuestion: {
@@ -218,7 +218,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/promotions',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: promotion
       }).then(function(res) {
@@ -236,7 +236,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data:{
           questionId: questionId
@@ -257,7 +257,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/comments/' + commentId + '/approve',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -275,7 +275,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/comments/' + commentId + '/disapprove',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -293,7 +293,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/approve',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -311,7 +311,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '/disapprove',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -330,7 +330,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/votes',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: vote
       }).then(function(res) {
@@ -349,7 +349,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
        
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -367,7 +367,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
        
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -385,7 +385,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
        
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -403,7 +403,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
        
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -421,7 +421,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/credit',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -439,7 +439,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
           if(res.data.toast){
@@ -450,13 +450,13 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
 
       });
     },
-    getClientMongoId: function(hardWareId) {
+    getAuthToken: function(hardWareId) {
       return $http({
         method: 'GET',
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + hardWareId,
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
         if(res.data.toast){
@@ -465,14 +465,14 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         return res.data;
       });
     },
-    checkClientMongoId: function(clientMongoId) {
+    checkAuthToken: function(authToken) {
       
       return $http({
         method: 'PUT',
-        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + clientMongoId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/client-mongo-id/' + authToken,
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         }
       }).then(function(res) {
         if(res.data.toast){
@@ -481,6 +481,25 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         return res.data;
       });
     },
+    
+    refreshAuthToken: function(authToken) {
+      
+      return $http({
+        method: 'GET',
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/refresh-token/' + authToken,
+        headers: {
+          'Content-Type': 'application/json',
+          authToken: $rootScope.authToken
+        }
+      }).then(function(res) {
+        if(res.data.toast){
+          $rootScope.toastr(res.data.toast.type, res.data.toast.text, res.data.toast.noTranslate)
+        }
+        return res.data;
+      });
+    },
+    
+    
     addCredit: function(addCreditAmount) {
       
       return $http({
@@ -488,7 +507,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
         url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/addCredit',
         headers: {
           'Content-Type': 'application/json',
-          clientMongoId: $rootScope.clientMongoId
+          authToken: $rootScope.authToken
         },
         data: {
           addCreditAmount: addCreditAmount
