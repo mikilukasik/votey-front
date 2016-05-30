@@ -5,7 +5,7 @@
     </div>
     <div class="card">
       <ion-item click-for-options class="item-borderless">
-        <ion-option-button ng-if="question.postedBy != clientMongoId" class="button-stable" ng-click="questionOptions.report(question)"> Report Question </ion-option-button>
+        <ion-option-button ng-if="!question.isMine" class="button-stable" ng-click="questionOptions.report(question)"> Report Question </ion-option-button>
         <div class="row">
           <div class="col-80">
             <h2>{{question.header}}</h2></div>
@@ -30,9 +30,9 @@
         <div class="col"><button class="button button-block button-stable" ng-click="promote.escalate(question)"><i class="ion-checkmark-round"></i> {{'ESCALATE' | translate:'labels'}}</button> </div>
       </div>
       <ion-item click-for-options ng-repeat="comment in question.comments | reverse" always-show-buttons="{{comment.isEditing}}" class="item-borderless" style="border-top: 1px solid #eee">
-        <ion-option-button ng-if="comment.addedBy == clientMongoId && !comment.isEditing" class="button button-stable" ng-click="commentOptions.edit(question, comment)"> Edit </ion-option-button>
-        <ion-option-button ng-if="comment.addedBy == clientMongoId&& !comment.isEditing" class="button button-stable" ng-click="commentOptions.remove(question, comment)"> Remove </ion-option-button>
-        <ion-option-button ng-if="comment.addedBy != clientMongoId&& !comment.isEditing" class="button button-stable" ng-click="commentOptions.report(question, comment)"> Report </ion-option-button>
+        <ion-option-button ng-if="comment.isMine && !comment.isEditing" class="button button-stable" ng-click="commentOptions.edit(question, comment)"> Edit </ion-option-button>
+        <ion-option-button ng-if="comment.isMine && !comment.isEditing" class="button button-stable" ng-click="commentOptions.remove(question, comment)"> Remove </ion-option-button>
+        <ion-option-button ng-if="!comment.isMine && !comment.isEditing" class="button button-stable" ng-click="commentOptions.report(question, comment)"> Report </ion-option-button>
         <ion-option-button ng-if="comment.isEditing" class="button button-stable" ng-click="commentOptions.save(question, comment)"> Save </ion-option-button>
         <ion-option-button ng-if="comment.isEditing" class="button button-stable" ng-click="commentOptions.cancelEdit(question, comment)"> Cancel </ion-option-button>
         <div class="item-text-wrap">
