@@ -37,6 +37,7 @@ var translations = {
       'ESCALATE': 'ESCALATE',
       'APPROVE': 'APPROVE',
       'DISAPPROVE': 'DISAPPROVE',
+      'SUBMIT': 'SUBMIT',
 
       'OK': 'OK',
       'Cancel': 'Cancel',
@@ -45,7 +46,11 @@ var translations = {
       'Available credit:': 'Available credit:',
       'You have 0 credit.': 'You have 0 credit.',
       'You have 0 credits.': 'You have 0 credits.',
-      'You have  credits.': ' '  //keep this translation empty!
+      'You have  credits.': ' ',  //keep this translation empty!
+
+      'ADD YOUR QUESTION': 'ADD YOUR QUESTION',
+      'Your question header': 'Your question header',
+      'Your question body': 'Your question body'
 
     },
     toasts: {
