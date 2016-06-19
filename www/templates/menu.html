@@ -18,26 +18,26 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="openLoginModal()" ng-if="loginMode !== 'username'">
-          {{'Login' | translate:'menu'}}
+        <ion-item menu-close not-yet-ng-click="openLoginModal()" ng-if="loginMode !== 'username'" coming-soon>
+          {{'Login' | translate:'menu'}} (Coming Soon)
         </ion-item> 
-        <ion-item menu-close ng-click="logoff()" ng-if="loginMode === 'username'">
+        <!-- <ion-item menu-close not-yet-ng-click="logoff()" ng-if="loginMode === 'username'">
           {{'Logoff' | translate:'menu'}}
-        </ion-item> 
-        <ion-item menu-close href="#/app/addQuestion">
-          {{'Add Question' | translate:'menu'}}
+        </ion-item>  -->
+        <ion-item menu-close href="#/app/addQuestion" coming-soon>
+          {{'Add Question' | translate:'menu'}} (Coming Soon)
         </ion-item>
-        <ion-item menu-close href="#/app/promoteQuestion">
-          {{'Promote Question' | translate:'menu'}}
+        <ion-item menu-close href="#/app/promoteQuestion"coming-soon>
+          {{'Promote Question' | translate:'menu'}} (Coming Soon)
         </ion-item>
         <ion-item menu-close href="#/app/vote">
           {{'Vote' | translate:'menu'}}
         </ion-item>
-        <ion-item menu-close href="#/app/moderateQuestions">
-          {{'Moderate Questions' | translate:'menu'}}
+        <ion-item menu-close href="#/app/moderateQuestions" coming-soon>
+          {{'Moderate Questions' | translate:'menu'}} (Coming Soon)
         </ion-item>
-        <ion-item menu-close href="#/app/moderateComments">
-          {{'Moderate Comments' | translate:'menu'}}
+        <ion-item menu-close href="#/app/moderateComments" coming-soon>
+          {{'Moderate Comments' | translate:'menu'}} (Coming Soon)
         </ion-item>
         <ion-item menu-close href="#/app/developer">
           {{'Developer' | translate:'menu'}}
