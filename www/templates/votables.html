@@ -9,7 +9,8 @@
           <div class="row">
             <div class="col-20" >
               <div style='font-size:48px;line-height:24px;'>
-                <i class="icon ion-android-checkbox-outline" style="color:silver"></i>
+                <i class="icon ion-android-checkbox-outline" style="color:silver" ng-show="votable.previousVote === 'no' || votable.previousVote === 'yes'"></i>
+                <i class="icon ion-android-checkbox-outline-blank" style="color:silver" ng-show="!votable.previousVote"></i>
               </div>
             </div>
             <div class="col-80">
@@ -27,9 +28,9 @@
           </div>
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close"></i>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'no'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'no'"></i>
   {{'NO' | translate:'labels'}}  ({{votable.voteDown}})</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark"></i>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'yes'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'yes'"></i>
   {{'YES' | translate:'labels'}} ({{votable.voteUp}})</button> </div>
         </div>
       </div>
