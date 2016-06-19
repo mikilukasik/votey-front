@@ -7,31 +7,30 @@
       <div class="card" ng-repeat="votable in votables">
         <ion-item href="#/app/votables/{{votable._id}}" class="item-borderless">
           <div class="row">
-
+            <div class="col-20" >
+              <div style='font-size:48px;line-height:24px;'>
+                <i class="icon ion-android-checkbox-outline" style="color:silver"></i>
+              </div>
+            </div>
             <div class="col-80">
-              <h2>{{votable.header}}</h2></div>
-            <div class="col"><i class="icon ion-arrow-up-b"></i> {{votable.voteUp}}</div>
-            <div class="col"><i class="icon ion-arrow-down-b"></i> {{votable.voteDown}}</div>
-
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="item-text-wrap"><p>{{votable.body}}</p></div>
+              <div class="row">
+                <div class="col-100">
+                  <div class="item-text-wrap">{{votable.header}}</div>
+               </div>
+              </div>
+              <div class="row">
+                <div class="col-100">
+                  <div class="item-text-wrap" style="font-size:12px;color:gray;line-height:14px;padding-top:5px;">{{votable.body}}</div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col">
-              <div><p style="font-size: 0.7em">{{votable.numberOfComments}} comment{{ votable.numberOfComments === 1 ? '' : 's' }}</p></div>
-            </div>
-          </div>
-
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close assertive"></i>
-  {{'NO' | translate:'labels'}}</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark balanced"></i>
-  {{'YES' | translate:'labels'}}</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon ion-close"></i>
+  {{'NO' | translate:'labels'}}  ({{votable.voteDown}})</button> </div>
+          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon ion-checkmark"></i>
+  {{'YES' | translate:'labels'}} ({{votable.voteUp}})</button> </div>
         </div>
       </div>
     </ion-list>

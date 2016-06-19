@@ -18,8 +18,8 @@ div.spinner {
 
 .errorLine {
   background: #f99;
-  
-  
+
+
 }
 
 .bordered {
@@ -56,10 +56,14 @@ div.spinner {
 }
 
 .light-orange-background{
-  background: #fffccc;
+  background:rgba(0, 123, 123, 0.2);
 }
 
 .small_button{
     line-height: 1px !important;
     min-height: 14px !important;
+}
+
+html .item-complex .item-content {
+  padding-right:5px;
 }
