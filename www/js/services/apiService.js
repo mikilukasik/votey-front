@@ -436,7 +436,7 @@ app.factory('apiService', function($http, $filter, $rootScope, $q) {
       return $rootScope.deviceIsReady().then(function(){
         return $http({
         method: 'GET',
-        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId,
+        url: apiServer.host + ((apiServer.port) ? (':' + apiServer.port) : ('')) + '/api/questions/' + questionId + '?rnd=' + Math.random(),
         headers: {
           'Content-Type': 'application/json',
           authToken: $rootScope.authToken
