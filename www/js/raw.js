@@ -1,4 +1,4 @@
-var preferredLanguage = 'en';
+var preferredLanguage = 'hu';
 var devMode = false;  //TODO: set this from dev UI
 
 var apiServer;
