@@ -1,4 +1,4 @@
-if (!translations) translations = {};
+if (typeof translations === 'undefined') translations = {};
 translations.en = {
   menu: {
     'Add Question': 'Add Question',
