@@ -2,21 +2,21 @@ if (typeof translations === 'undefined') translations = {};
 translations.hu = {
   menu: {
     'Add Question': 'Új kérdés',
-    'Promote Question': 'Promote Question',
+    'Promote Question': 'Kérdések népszerűsítése',
     'Vote': 'Szavazás',
     'Login': 'Bejelentkezés',
     'Logoff': 'Kijelentkezés',
     'Developer': 'Fejlesztő',
-    'Moderate Questions': 'Moderate Questions',
-    'Moderate Comments': 'Moderate Comments'
+    'Moderate Questions': 'Kérdések elbírálása',
+    'Moderate Comments': 'Kommentek elbírálása'
   },
   titles: {
     'Add a New Question': 'Add a New Question',
     'Questions Available for Promoting': 'Questions Available for Promoting',
-    'Questions Available for Voting': 'Questions Available for Voting',
-    'Menu': 'Menu',
-    'Vote': 'Vote',
-    'Promote Question': 'Promote Question',
+    'Questions Available for Voting': 'Szavazható kérdések',
+    'Menu': 'Menü',
+    'Vote': 'Szavazás',
+    'Promote Question': 'Kérdés népszerűsítése',
     'Developer': 'Developer',
     'Login': 'Bejelentkezés',
     'Register': 'Regisztráció',
@@ -40,12 +40,12 @@ translations.hu = {
     'SUBMIT': 'MEHET',
 
     'OK': 'OK',
-    'Cancel': 'Cancel',
+    'Cancel': 'Mégse',
 
     'Close': 'Close',
     'Available credit:': 'Available credit:',
-    'You have 0 credit.': 'You have 0 credit.',
-    'You have 0 credits.': 'You have 0 credits.',
+    'You have 0 credit.': 'Önnek 0 kreditje van.',
+    'You have 0 credits.': 'Önnek 0 kreditje van.',
     'You have  credits.': ' ', //keep this translation empty!
 
     'ADD YOUR QUESTION': 'ADD YOUR QUESTION',
