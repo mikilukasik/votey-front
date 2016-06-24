@@ -1,12 +1,12 @@
 if (typeof translations === 'undefined') translations = {};
 translations.hu = {
   menu: {
-    'Add Question': 'Add Question',
+    'Add Question': 'Új kérdés',
     'Promote Question': 'Promote Question',
-    'Vote': 'Vote',
-    'Login': 'Login',
-    'Logoff': 'Logoff',
-    'Developer': 'Developer',
+    'Vote': 'Szavazás',
+    'Login': 'Bejelentkezés',
+    'Logoff': 'Kijelentkezés',
+    'Developer': 'Fejlesztő',
     'Moderate Questions': 'Moderate Questions',
     'Moderate Comments': 'Moderate Comments'
   },
@@ -18,8 +18,8 @@ translations.hu = {
     'Vote': 'Vote',
     'Promote Question': 'Promote Question',
     'Developer': 'Developer',
-    'Login': 'Login',
-    'Register': 'Register',
+    'Login': 'Bejelentkezés',
+    'Register': 'Regisztráció',
     'Moderate Questions': 'Moderate Questions',
     'Moderate Comments': 'Moderate Comments'
 
@@ -27,7 +27,7 @@ translations.hu = {
   labels: {
     'Your Question:': 'Your Question:',
     'Your Question Header:': 'Your Question Header:',
-    'Submit': 'Submit',
+    'Submit': 'Mehet!',
     'Question:': 'Question:',
 
     'YES': 'IGEN',
@@ -37,7 +37,7 @@ translations.hu = {
     'ESCALATE': 'ESCALATE',
     'APPROVE': 'APPROVE',
     'DISAPPROVE': 'DISAPPROVE',
-    'SUBMIT': 'SUBMIT',
+    'SUBMIT': 'MEHET',
 
     'OK': 'OK',
     'Cancel': 'Cancel',
@@ -49,8 +49,8 @@ translations.hu = {
     'You have  credits.': ' ', //keep this translation empty!
 
     'ADD YOUR QUESTION': 'ADD YOUR QUESTION',
-    'Your question header': 'Your question header',
-    'Your question body': 'Your question body'
+    'Your question header': 'Az Ön kérdése',
+    'Your question body': 'Az Ön kérdése részletesen kifejtve'
 
   },
   toasts: {
