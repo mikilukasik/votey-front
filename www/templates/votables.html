@@ -8,7 +8,7 @@
         <ion-item href="#/app/votables/{{votable._id}}" class="item-borderless">
           <div class="row">
             <div class="col-20" >
-              <div style='font-size:48px;line-height:24px;'>
+              <div style='font-size:54px;line-height:24px;'>
                 <i class="icon ion-android-checkbox-outline" style="color:gray" ng-show="votable.previousVote"></i>
                 <i class="icon ion-android-checkbox-outline" style="color:silver" ng-show="!votable.previousVote"></i>
               </div>
@@ -16,12 +16,12 @@
             <div class="col-80">
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap">{{votable.header}}</div>
+                  <div class="item-text-wrap" style='font-size:18px;line-height:24px;'>{{votable.header}}</div>
                </div>
               </div>
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap" style="font-size:12px;color:gray;line-height:14px;padding-top:5px;">{{votable.body}}</div>
+                  <div class="item-text-wrap" style="font-size:15px;color:gray;line-height:16px;padding-top:10px;">{{votable.body}}</div>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
         <ion-item href="#/app/comingSoon" class="item-borderless">
           <div class="row">
             <div class="col-20" >
-              <div style='font-size:48px;line-height:24px;'>
+              <div style='font-size:54px;line-height:24px;'>
                 <i class="icon ion-android-checkbox-outline" style="color:gray" ng-show="votable.previousVote"></i>
                 <i class="icon ion-android-checkbox-outline" style="color:silver" ng-show="!votable.previousVote"></i>
               </div>
@@ -48,12 +48,12 @@
             <div class="col-80">
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap">{{'Your question header' | translate:'labels'}}</div>
+                  <div class="item-text-wrap" style='font-size:18px;line-height:24px;'>{{'Your question header' | translate:'labels'}}</div>
                </div>
               </div>
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap" style="font-size:12px;color:gray;line-height:14px;padding-top:5px;">{{'Your question body' | translate:'labels'}}</div>
+                  <div class="item-text-wrap" style="font-size:15px;color:gray;line-height:16px;padding-top:10px;">{{'Your question body' | translate:'labels'}}</div>
                 </div>
               </div>
             </div>

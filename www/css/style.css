@@ -71,3 +71,8 @@ html .item-complex .item-content {
 .coming-soon{
   color:silver;
 }
+
+.activated {
+    border-color: #fff !important;
+    background-color: #fff !important; 
+}

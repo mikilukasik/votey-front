@@ -45,10 +45,10 @@
       </ion-item>
     </div> -->
       <div class="card">
-        <ion-item href="#/app/questions/{{question._id}}" class="item-borderless">
+        <ion-item class="item-borderless">
           <div class="row">
             <div class="col-20" >
-              <div style='font-size:48px;line-height:24px;'>
+              <div style='font-size:54px;line-height:24px;'>
                 <i class="icon ion-android-checkbox-outline" style="color:gray" ng-show="question.previousVote"></i>
                 <i class="icon ion-android-checkbox-outline" style="color:silver" ng-show="!question.previousVote"></i>
               </div>
@@ -56,12 +56,12 @@
             <div class="col-80">
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap">{{question.header}}</div>
+                  <div class="item-text-wrap" style='font-size:18px;line-height:24px;'>{{question.header}}</div>
                </div>
               </div>
               <div class="row">
                 <div class="col-100">
-                  <div class="item-text-wrap" style="font-size:12px;color:gray;line-height:14px;padding-top:5px;">{{question.body}}</div>
+                  <div class="item-text-wrap" style="font-size:15px;color:gray;line-height:16px;padding-top:10px;">{{question.body}}</div>
                 </div>
               </div>
             </div>
