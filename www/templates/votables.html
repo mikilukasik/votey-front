@@ -1,8 +1,6 @@
 <ion-view view-title="{{'Questions Available for Voting' | translate:'titles'}}">
   <ion-content class="light-orange-background">
-    <div class="spinner" style="z-index:99" ng-if="spinIt">
-      <ion-spinner icon="android"></ion-spinner>
-    </div>
+    
     <ion-list>
       <div class="card" ng-repeat="votable in votables">
         <ion-item href="#/app/votables/{{votable._id}}" class="item-borderless">
@@ -28,10 +26,34 @@
           </div>
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }"><i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'no'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'no'"></i>
-  {{'NO' | translate:'labels'}}  ({{votable.voteDown}})</button> </div>
-          <div class="col"><button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }"><i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'yes'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'yes'"></i>
-  {{'YES' | translate:'labels'}} ({{votable.voteUp}})</button> </div>
+          <div class="col">
+            
+            <button class="button button-block" href="" ng-click="vote.down(votable,$index)" ng-class="{ disabled: votable.previousVote === 'no' }">
+            
+                <i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'no'">
+                </i>
+                <i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'no'">
+                </i>
+                <span>{{'NO' | translate:'labels'}}  ({{votable.voteDown}})</span>
+                <span class="spinner">
+                   <ion-spinner icon="spiral"></ion-spinner>
+                </span>
+             
+            </button>
+         </div>
+          <div class="col">
+            
+            <button class="button button-block" href="" ng-click="vote.up(votable,$index)" ng-class="{ disabled: votable.previousVote === 'yes' }">
+              <i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'yes'">
+              </i>
+              <i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'yes'">
+              </i>
+              <span>{{'YES' | translate:'labels'}} ({{votable.voteUp}})</span>
+              <span class="spinner">
+                <ion-spinner icon="spiral"></ion-spinner>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -60,8 +82,13 @@
           </div>
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block disabled" href="" ng-click="" disabled>
-  {{'SUBMIT' | translate:'labels'}} (Coming Soon)</button> </div>
+          <div class="col">
+            <div class="spinner" style="z-index:99" ng-if="spinIt">htfjtyfu
+              <ion-spinner icon="android"></ion-spinner>
+            </div>
+            <button class="button button-block disabled" href="" ng-click="" disabled>
+  {{'SUBMIT' | translate:'labels'}} (Coming Soon)</button>
+          </div>
           
         </div>
       </div>

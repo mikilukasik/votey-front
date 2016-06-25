@@ -1,5 +1,9 @@
 app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout, $interval, $filter, $ionicSideMenuDelegate, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
   
+  makeItSpin = function(){
+    $rootScope.spinIt = true;
+  };
+  
   var whenMenuOpened = function(){
     apiService.getMyCredit().then(function(result){
         $rootScope.myCredit = (result.data) ? result.data: 0;
@@ -76,7 +80,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
     } else {
       //mobile already initialized
     }
-  }, 5000);
+  }, 1000);
   $scope.getIdFromHardwareId = function() {
     $rootScope.toConsole('requesting authToken...');
     apiService.getAuthToken($rootScope.device.uuid).then(function(res) {

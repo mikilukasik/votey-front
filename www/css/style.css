@@ -1,12 +1,12 @@
-/* Empty. Add your own CSS if you like */
-div.spinner {
+
+/*div.spinner {
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   height: 100%;
   text-align: center;
   /*background: black;
-  opacity:0.30;*/
+  opacity:0.30;
 }
 
 .spinner svg {
@@ -14,6 +14,37 @@ div.spinner {
   width: 19% !important;
   height: 85px !important;
 
+}*/
+
+span.spinner {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /*height: 50%;*/
+    
+    background-color: rgba(0,0,0,0.2);
+    /*opacity:0.20;*/
+    
+    height: 100%;
+    width: 100%;
+    
+    vertical-align: middle;
+    
+    z-index: 99;
+    
+}
+
+
+
+.spinner svg {
+  /*width: 20px !important;
+  height: 20px !important;*/
+  top: 8px;
+  
+  vertical-align: middle;
 }
 
 .errorLine {
@@ -73,6 +104,7 @@ html .item-complex .item-content {
 }
 
 .activated {
+  /*this is to stop card going gray on touch, that comes up too when scrolling*/
     border-color: #fff !important;
     background-color: #fff !important; 
 }
