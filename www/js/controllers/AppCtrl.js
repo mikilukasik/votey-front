@@ -1,9 +1,19 @@
-app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout, $interval, $filter, $ionicSideMenuDelegate, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
+app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionicModal, $timeout, $interval, $filter, $ionicSideMenuDelegate, apiService, toastr, errorService, $cordovaGeolocation, $cordovaDevice) {
   
-  makeItSpin = function(){
-    $rootScope.spinIt = true;
+  $rootScope.language = preferredLanguage;
+  
+  $rootScope.showLoading = function() {
+    $ionicLoading.show({
+      template: $filter('translate')('Loading...', 'labels', $rootScope.language)
+    });
   };
   
+  $rootScope.hideLoading = function(){
+    $ionicLoading.hide();
+  };
+  
+  //$rootScope.showLoading();
+ 
   var whenMenuOpened = function(){
     apiService.getMyCredit().then(function(result){
         $rootScope.myCredit = (result.data) ? result.data: 0;
@@ -15,7 +25,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $q, $ionicModal, $timeout
   }, function(ratio) {
     if (ratio == 1) whenMenuOpened();
   });
-  $rootScope.language = preferredLanguage;
+  
   // var posOptions = {timeout: 10000, enableHighAccuracy: false};
   // $cordovaGeolocation
   //   .getCurrentPosition(posOptions)

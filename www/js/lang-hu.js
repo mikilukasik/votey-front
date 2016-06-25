@@ -50,7 +50,9 @@ translations.hu = {
 
     'ADD YOUR QUESTION': 'ADD YOUR QUESTION',
     'Your question header': 'Az Ön kérdése',
-    'Your question body': 'Az Ön kérdése részletesen kifejtve'
+    'Your question body': 'Az Ön kérdése részletesen kifejtve',
+    
+    'Loading...': 'Töltés...'
 
   },
   toasts: {

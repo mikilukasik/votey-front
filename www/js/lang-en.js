@@ -50,7 +50,9 @@ translations.en = {
 
     'ADD YOUR QUESTION': 'ADD YOUR QUESTION',
     'Your question header': 'Your question header',
-    'Your question body': 'Your question body'
+    'Your question body': 'Your question body',
+    
+    'Loading...': 'Loading...'
 
   },
   toasts: {
