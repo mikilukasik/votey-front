@@ -4,7 +4,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
   
   $rootScope.showLoading = function() {
     $ionicLoading.show({
-      template: $filter('translate')('Loading...', 'labels', $rootScope.language)
+      template: $filter('translate')('Loading...', 'labels', $rootScope.language),
+      showBackdrop: false
     });
   };
   
@@ -20,11 +21,16 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
     })
   };
 
+  ////////////////////below is to judge when menu is opened
   $scope.$watch(function() {
     return $ionicSideMenuDelegate.getOpenRatio();
   }, function(ratio) {
     if (ratio == 1) whenMenuOpened();
   });
+  //////////////////////////
+  
+  
+  
   
   // var posOptions = {timeout: 10000, enableHighAccuracy: false};
   // $cordovaGeolocation
@@ -36,6 +42,8 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
   //   }, function(err) {
   //     // error
   //   });
+  
+  
   $rootScope.device = {};
   $scope.getIdFromCookie = function(dontGetCookie) {
     $rootScope.authToken = '';
@@ -281,13 +289,16 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
   };
   $rootScope.vote = {
     up: function(question, index) {
-      $rootScope.spinIt = true;
+      //$rootScope.spinIt = true;
+      question.spinOnYes = true;
       apiService.postVote({
         // authToken: $rootScope.authToken,
         questionId: question._id,
         voting: true
       }).then(function(res) {
-        $rootScope.spinIt = false;
+        //$rootScope.spinIt = false;
+        question.spinOnYes = false;
+      
         if (res.success) {
           if (question.previousVote === 'no') question.voteDown--;
           question.voteUp++;
@@ -303,13 +314,17 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
       })
     },
     down: function(question, index) {
-      $rootScope.spinIt = true;
+      //$rootScope.spinIt = true;
+      question.spinOnNo = true;
+      
       apiService.postVote({
         // authToken: $rootScope.authToken,
         questionId: question._id,
         voting: false
       }).then(function(res) {
-        $rootScope.spinIt = false;
+        // $rootScope.spinIt = false;
+        question.spinOnNo = false;
+      
         if (res.success) {
           if (question.previousVote === 'yes') question.voteUp--;
           question.voteDown++;

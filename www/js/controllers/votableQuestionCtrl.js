@@ -1,5 +1,9 @@
 app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams, $ionicPopup, $filter, $location, apiService, errorService, classesService) {
 
+  $scope.$on('$ionicView.beforeEnter', function(e) {
+    $scope.init()
+  });
+
   $scope.postCommentObj = {};
   $scope.question = {};
   //$scope.question.comments = [];
@@ -7,16 +11,19 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
   $scope.questionId = $stateParams.votableId;
   $rootScope.toConsole('$scope.questionId', $stateParams.votableId);
 
-  $scope.updateQuestions= function() {
-    $rootScope.spinIt = true;
+  $scope.updateQuestion= function() {
+    //$rootScope.spinIt = true;
+    $rootScope.showLoading();
     apiService.getQuestion($scope.questionId).then(function(result) {
       var question = result.data;
-      $rootScope.spinIt = false;
+      //$rootScope.spinIt = false;
+      $rootScope.hideLoading();
       $rootScope.toConsole('question received', question)
       $scope.question = question;
       //if(!$scope.question.comments) $scope.question.comments = [];
     }, function(err) {
-      $rootScope.spinIt = false;
+      //$rootScope.spinIt = false;
+      $rootScope.hideLoading();
       errorService.dealWithError(err);
     });
   };
@@ -24,7 +31,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
 
   $scope.init = function(){
 
-    $scope.updateQuestions();
+    $scope.updateQuestion();
 
   };
 
@@ -85,7 +92,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
         if(confirmed){
 
           apiService.deleteComment(question, comment).then(function(apiRes){
-            $scope.updateQuestions();
+            $scope.updateQuestion();
           })
 
         }
@@ -105,7 +112,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
       
           comment.isEditing = undefined;
           apiService.putComment(question, comment).then(function(apiRes){
-            $scope.updateQuestions();
+            $scope.updateQuestion();
           })
 
     },
@@ -120,7 +127,7 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
         if(confirmed){
 
           apiService.reportComment(question, comment).then(function(apiRes){
-            $scope.updateQuestions();
+            $scope.updateQuestion();
           })
 
 
@@ -131,6 +138,6 @@ app.controller('votableQuestionCtrl', function($rootScope, $scope, $stateParams,
 
   };
 
-  $scope.init();
+  //$scope.init();
   
 })
