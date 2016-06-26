@@ -3,14 +3,14 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
   $rootScope.language = preferredLanguage;
   
   $rootScope.showLoading = function() {
-    $ionicLoading.show({
-      template: $filter('translate')('Loading...', 'labels', $rootScope.language),
-      showBackdrop: false
-    });
+    // $ionicLoading.show({
+    //   template: $filter('translate')('Loading...', 'labels', $rootScope.language),
+    //   showBackdrop: false
+    // });
   };
   
   $rootScope.hideLoading = function(){
-    $ionicLoading.hide();
+    // $ionicLoading.hide();
   };
   
   //$rootScope.showLoading();
