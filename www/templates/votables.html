@@ -31,14 +31,14 @@
 
             <button class="button button-block" href="" ng-click="vote.down(votable,$index);" ng-class="{ disabled: votable.previousVote === 'no' }">
             
-                <i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'no'">
-                </i>
-                <i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'no'">
-                </i>
-                <span>{{'NO' | translate:'labels'}}  ({{votable.voteDown}})</span>
-                <span class="spinner" ng-if="votable.spinOnNo">
-                   <ion-spinner icon="spiral"></ion-spinner>
-                </span>
+              <i class="icon icon ion-android-checkbox-outline" ng-show="votable.previousVote === 'no'">
+              </i>
+              <i class="icon icon ion-android-checkbox-outline-blank" ng-show="votable.previousVote !== 'no'">
+              </i>
+              <span>{{'NO' | translate:'labels'}}  ({{votable.voteDown}})</span>
+              <span class="spinner" ng-if="votable.spinOnNo">
+                  <ion-spinner icon="spiral"></ion-spinner>
+              </span>
              
             </button>
           </div>

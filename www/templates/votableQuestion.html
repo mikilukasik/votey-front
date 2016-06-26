@@ -68,10 +68,46 @@
           </div>
         </ion-item>
         <div class="row">
-          <div class="col"><button class="button button-block" href="" ng-click="vote.down(question,$index)" ng-class="{ disabled: question.previousVote === 'no' }"><i class="icon icon ion-android-checkbox-outline" ng-show="question.previousVote === 'no'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="question.previousVote !== 'no'"></i>
+          <div class="col">
+
+            <button class="button button-block" href="" ng-click="vote.down(question,$index);" ng-class="{ disabled: question.previousVote === 'no' }">
+            
+              <i class="icon icon ion-android-checkbox-outline" ng-show="question.previousVote === 'no'">
+              </i>
+              <i class="icon icon ion-android-checkbox-outline-blank" ng-show="question.previousVote !== 'no'">
+              </i>
+              <span>{{'NO' | translate:'labels'}}  ({{question.voteDown}})</span>
+              <span class="spinner" ng-if="question.spinOnNo">
+                  <ion-spinner icon="spiral"></ion-spinner>
+              </span>
+             
+            </button>
+          </div>
+          <div class="col">
+
+            <button class="button button-block" href="" ng-click="vote.up(question,$index)" ng-class="{ disabled: question.previousVote === 'yes' }">
+              
+              <i class="icon icon ion-android-checkbox-outline" ng-show="question.previousVote === 'yes'">
+              </i>
+              <i class="icon icon ion-android-checkbox-outline-blank" ng-show="question.previousVote !== 'yes'">
+              </i>
+              <span>{{'YES' | translate:'labels'}} ({{question.voteUp}})</span>
+              <span class="spinner" ng-if="question.spinOnYes">
+                <ion-spinner icon="spiral"></ion-spinner>
+              </span>
+              
+            </button>
+            
+          </div>
+          
+          
+          <!--<div class="col"><button class="button button-block" href="" ng-click="vote.down(question,$index)" ng-class="{ disabled: question.previousVote === 'no' }"><i class="icon icon ion-android-checkbox-outline" ng-show="question.previousVote === 'no'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="question.previousVote !== 'no'"></i>
   {{'NO' | translate:'labels'}}  ({{question.voteDown}})</button> </div>
           <div class="col"><button class="button button-block" href="" ng-click="vote.up(question,$index)" ng-class="{ disabled: question.previousVote === 'yes' }"><i class="icon icon ion-android-checkbox-outline" ng-show="question.previousVote === 'yes'"></i><i class="icon icon ion-android-checkbox-outline-blank" ng-show="question.previousVote !== 'yes'"></i>
-  {{'YES' | translate:'labels'}} ({{question.voteUp}})</button> </div>
+  {{'YES' | translate:'labels'}} ({{question.voteUp}})</button> </div>-->
+  
+  
+  
         </div>
       </div>
     </div>
