@@ -4,8 +4,8 @@ var devMode = false;  //TODO: set this from dev UI
 var apiServer;
 if (devMode) {
   apiServer = {
-    //host: 'http://miki.ddns.net',
-    host: 'http://localhost',
+    host: 'http://miki.ddns.net',
+    //host: 'http://localhost',
     port: 5000
   };
 } else {

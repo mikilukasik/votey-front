@@ -4,6 +4,8 @@ app.factory('errorService', function($rootScope, $http) {
 
       $rootScope.toConsole('silentError:', err)
 
+      if (err.status === 0) $rootScope.toastr('error', 'There was no response from the server.');
+
       if(showToastr) $rootScope.toastr(
       	showToastr.type ? showToastr.type : 'error',
       	showToastr.text ? showToastr.text : 'error: ' + err.data,

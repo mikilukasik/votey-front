@@ -83,7 +83,9 @@ translations.hu = {
     'Positive promotion registered.': 'Positive promotion registered.',
 
     'Client not in DB.': 'Client not in DB.',
-    "You don't have enough credit (min: 0, you have: 0)": "You don't have enough credit (min: 0, you have: 0)"
+    "You don't have enough credit (min: 0, you have: 0)": "You don't have enough credit (min: 0, you have: 0)",
+
+    'There was no response from the server.': 'A szerver nem válaszolt.'
 
   },
 
@@ -92,4 +94,5 @@ translations.hu = {
     'Are you sure you want to report this question for being inappropriate?': 'Are you sure you want to report this question for being inappropriate?',
     'Are you sure you want to remove this comment?': 'Are you sure you want to remove this comment?'
   }
+  
 }

@@ -310,7 +310,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
         }
         $rootScope.toConsole(res)
       }, function(err) {
-        $rootScope.spinIt = false;
+        question.spinOnYes = false;
         errorService.dealWithError(err);
       })
     },
@@ -336,7 +336,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
         }
         $rootScope.toConsole(res)
       }, function(err) {
-        $rootScope.spinIt = false;
+        question.spinOnNo = false;
         errorService.dealWithError(err);
       })
     }
