@@ -83,7 +83,9 @@ translations.en = {
     'Positive promotion registered.': 'Positive promotion registered.',
 
     'Client not in DB.': 'Client not in DB.',
-    "You don't have enough credit (min: 0, you have: 0)": "You don't have enough credit (min: 0, you have: 0)"
+    "You don't have enough credit (min: 0, you have: 0)": "You don't have enough credit (min: 0, you have: 0)",
+
+    'There was no response from the server.': 'There was no response from the server.'
 
   },
 
