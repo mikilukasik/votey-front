@@ -98,7 +98,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
     } else {
       //mobile already initialized
     }
-  }, 1000);
+  }, 10000);
   $scope.getIdFromHardwareId = function() {
     $rootScope.toConsole('requesting authToken...');
     apiService.getAuthToken($rootScope.device.uuid).then(function(res) {
@@ -107,6 +107,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
       $rootScope.loginMode = 'hardWareId';
       $rootScope.toConsole('authToken received', $rootScope.authToken);
       $rootScope.forceResolveWaitForDevice();
+      $rootScope.device.isReady = true;
     }, function(err) {
       $rootScope.toConsole('silentError', 'NO authToken AT ALL!!');
       errorService.dealWithError(err);
@@ -115,7 +116,7 @@ app.controller('AppCtrl', function($rootScope, $scope, $ionicLoading, $q, $ionic
   var whenDeviceReady = function() {
     $rootScope.toConsole('Device got ready in ' + (new Date() - indexGlobals.appStarted) + ' seconds.');
     $rootScope.device.isMobile = true;
-    $rootScope.device.isReady = true;
+    //$rootScope.device.isReady = true;
     $rootScope.device.deviceInfo = $cordovaDevice.getDevice();
     $rootScope.device.cordova = $cordovaDevice.getCordova();
     $rootScope.device.model = $cordovaDevice.getModel();
